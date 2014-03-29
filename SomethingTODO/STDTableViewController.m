@@ -29,11 +29,6 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"listvc_title_vc", nil);
-    
-    // Right button for adding new reminders
-    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
-
-    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
 
     [self requestAccess];
 }
@@ -164,17 +159,29 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // We can use the event store now
                     [self fetchData];
+					
+					// Right button for adding new reminders
+					UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
+					
+					self.navigationItem.rightBarButtonItem = rightBarButtonItem;
                 });
             }
         }];
     }
     else if (authorizationStatus == EKAuthorizationStatusAuthorized)
     {
+		// Right button for adding new reminders
+		UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
+		
+		self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+		
         [self fetchData];
     }
     else
     {
         // Access denied
+		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"listvc_no_access", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
+        [alert show];
     }
 }
 

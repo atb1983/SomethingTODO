@@ -15,7 +15,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface STDEditReminderViewController ()
+@interface STDEditReminderViewController () <UITextFieldDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel            *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextField        *titleTextField;
@@ -58,7 +58,46 @@
     }
 }
 
-#pragma mark - Helpers
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.titleTextField)
+	{
+        [self.descriptionTextField becomeFirstResponder];
+	}
+	
+    return NO;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange) range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+	{
+        [textView resignFirstResponder];
+		[self saveReminderInformation];
+		
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - IBActions
+
+- (IBAction)saveChanges:(id)sender
+{
+	if ([self.titleTextField.text isEqualToString:@""])
+	{
+		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"edit_title_textfield_empty", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
+		[alert show];
+		
+		[self.titleTextField becomeFirstResponder];
+	}
+}
+
+#pragma mark - Helper
 
 - (void)applyStyle
 {
@@ -75,36 +114,29 @@
     [self.titleTextField setRightPadding:4.0f];
     
     [self.descriptionTextField applyBorderWithColor:defaultBlue];
-    
     [self.saveChangesButton applyBorderWithColor:defaultBlue];
 }
 
 - (void)configureView
 {
     // Update the user interface for the detail item.
-    
     if (self.currentReminder)
     {
         EKReminder *reminder = self.currentReminder;
         
+		// only when the reminder is valid we fetch its data
         if (reminder)
         {
             self.titleTextField.text = reminder.title;
             self.descriptionTextField.text = reminder.notes;
             [self.prioritySergmentedControl setSelectedSegmentIndex:reminder.priority];
         }
-        else
-        {
-            
-        }
     }
 }
 
-#pragma mark - Helper
-
-- (IBAction)saveChanges:(id)sender
+- (void)saveReminderInformation
 {
-    BOOL isNewReminder = NO;
+	BOOL isNewReminder = NO;
     
     if (!self.currentReminder)
     {
@@ -114,14 +146,18 @@
         isNewReminder = YES;
     }
     
+	// new information
     [self.currentReminder setTitle:self.titleTextField.text];
     [self.currentReminder setNotes:self.descriptionTextField.text];
     [self.currentReminder setPriority:self.prioritySergmentedControl.selectedSegmentIndex];
     
+	// we try to save the reminder
     if ([STDReminderUtils saveReminderToStore:self.currentReminder])
     {
+		// saved and new
         if (isNewReminder)
         {
+			// we trigger the delegate
             if ([self.delegate respondsToSelector:@selector(editReminderViewController:didSaveNewReminder:)])
             {
                 [self.delegate editReminderViewController:self didSaveNewReminder:self.currentReminder];
@@ -129,6 +165,7 @@
         }
         else
         {
+			// we trigger the delegate
             if ([self.delegate respondsToSelector:@selector(editReminderViewController:didModifiedNeminder:)])
             {
                 [self.delegate editReminderViewController:self didModifiedNeminder:self.currentReminder];
@@ -139,10 +176,9 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error Reminder" message:@"Your reminder hasn't not been saved. there is an unkown error." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"edit_reminder_error", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
         [alert show];
     }
 }
-
 
 @end

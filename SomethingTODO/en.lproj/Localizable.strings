@@ -12,15 +12,18 @@
 
 // List Reminders VC
 "listvc_title_vc" = "Your ToDo List";
-"listvc_new_reminder_added" = "New reminder added to your list";
+"listvc_new_reminder_added" = "New reminder added to your list.";
 "listvc_reminder_updated" = "Your reminder is updated.";
+"listvc_no_access" = "For using this app you must give access to your reminders. please check your settings";
 
 // Edit Reminder VC
 "edit_title_vc" = "Reminder Details";
 "edit_title_label" = "Title";
 "edit_title_textfield_placeholder" = "Write your title";
+"edit_title_textfield_empty" = "The reminder must contain a title";
 "edit_description_label" = "Description:";
 "edit_priority_label" = "Priority:";
 "edit_priority_segment_normal" = "Normal";
 "edit_priority_segment_high" = "High";
 "edit_save" = "Save changes";
+"edit_reminder_error" = "Your reminder hasn't not been saved. there is an unkown error.";

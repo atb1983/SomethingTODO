@@ -10,20 +10,24 @@
 
 @class STDEditReminderViewController;
 
+// Delegate
 @protocol STDEditReminderViewControllerDelegate <NSObject>
 
 @required
 
+// new reminder saved sucessfully
 - (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didSaveNewReminder:(EKReminder *)reminder;
+
+// the reminder is updated
 - (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didModifiedNeminder:(EKReminder *)reminder;
 
 @end
-
 
 @interface STDEditReminderViewController : UIViewController
 
 @property (weak) id <STDEditReminderViewControllerDelegate> delegate;
 
+// reminder to check
 @property (strong, nonatomic) EKReminder *currentReminder;
 
 @end
