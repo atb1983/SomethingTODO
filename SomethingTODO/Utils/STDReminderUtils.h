@@ -10,6 +10,7 @@
 
 @interface STDReminderUtils : NSObject
 
++ (NSString *)getTimestampForDate:(NSDateComponents*)dateComponents;
 + (BOOL)saveReminderToStore:(EKReminder *)reminder;
 + (BOOL)removeReminder:(EKReminder *)reminder;
 

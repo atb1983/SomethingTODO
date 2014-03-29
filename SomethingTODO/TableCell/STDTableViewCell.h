@@ -10,8 +10,9 @@
 
 @interface STDTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *labelTitle;
-@property (weak, nonatomic) IBOutlet UILabel *labelDate;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
 @property (assign, nonatomic) BOOL taskCompleted;
 

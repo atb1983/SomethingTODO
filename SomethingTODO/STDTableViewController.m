@@ -17,8 +17,7 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
 
 @interface STDTableViewController () <UITableViewDelegate , STDEditReminderViewControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray    *reminderList;
-@property (nonatomic, strong) NSIndexPath       *currentIndexPath;
+@property (nonatomic, strong) NSMutableArray *reminderList;
 
 @end
 
@@ -49,12 +48,11 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.currentIndexPath = indexPath;
-    
     [self performSegueWithIdentifier:kSegueGoToEditReminder sender:[self.reminderList objectAtIndex:indexPath.row]];
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
 	return UITableViewCellEditingStyleDelete;
 }
 
@@ -65,11 +63,13 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
     {
         if ([STDReminderUtils removeReminder:[self.reminderList objectAtIndex:indexPath.row]])
         {
-            [self.reminderList removeObjectAtIndex:indexPath.row];
+			[self.reminderList removeObjectAtIndex:indexPath.row];
 
             [self.tableView beginUpdates];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             [self.tableView endUpdates];
+			
+			[tableView reloadRowsAtIndexPaths:[tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
 }
@@ -78,16 +78,22 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
 {
     EKReminder *reminder = [self.reminderList objectAtIndex:indexPath.row];
     
+	cell.tag = indexPath.row;
+	
     UIColor *highPriorityColor = [UIColor colorWithRed:232.0f/255.0f green:39.0f/255.0f blue:61.0/255.0f alpha:1.0];
     cell.backgroundColor = reminder.priority > 0 ? highPriorityColor : [UIColor whiteColor];
 
-    cell.labelTitle.text = reminder.title;
-    cell.labelTitle.textColor = reminder.priority > 0 ? [UIColor whiteColor] : [UIColor blackColor];
-    cell.labelDate.textColor = reminder.priority > 0 ? [UIColor whiteColor] : [UIColor blackColor];
-    //    cell.labelDate.text = event.lastModifiedDate;
+	UIColor *labelColor = reminder.priority > 0 ? [UIColor whiteColor] : [UIColor blackColor];
+	
+    cell.titleLabel.text = reminder.title;
+    cell.titleLabel.textColor = labelColor;
     
-    cell.tag = indexPath.row;
-    
+	cell.dateLabel.textColor = labelColor;
+	cell.dateLabel.text = [STDReminderUtils getTimestampForDate:reminder.startDateComponents];
+	
+	cell.descriptionLabel.text = reminder.notes;
+	cell.dateLabel.textColor = labelColor;
+	
     // Gestures
     UISwipeGestureRecognizer *leftToRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     [leftToRightRecognizer setDirection:UISwipeGestureRecognizerDirectionLeft+UISwipeGestureRecognizerDirectionRight];
@@ -105,19 +111,18 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
     
     [self.tableView beginUpdates];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
     [self.tableView endUpdates];
     
+	[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationFade];
+	
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"listvc_new_reminder_added", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
     [alert show];
 }
 
 - (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didModifiedNeminder:(EKReminder *)reminder
 {
-    [self.tableView beginUpdates];
-    NSArray *reloadIndexPath = [NSArray arrayWithObject:self.currentIndexPath];
-    [self.tableView reloadRowsAtIndexPaths:reloadIndexPath withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
+    [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationFade];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"listvc_reminder_updated", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
     [alert show];
@@ -125,7 +130,7 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
 
 #pragma mark - Segue
 
-- (void)addNewItem:(UIEvent *)event
+- (void)addNewReminder:(UIEvent *)event
 {
     [self performSegueWithIdentifier:kSegueGoToEditReminder sender:nil];
 }
@@ -158,23 +163,15 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
             if (granted) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // We can use the event store now
+					[self addRigthButton];
                     [self fetchData];
-					
-					// Right button for adding new reminders
-					UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
-					
-					self.navigationItem.rightBarButtonItem = rightBarButtonItem;
                 });
             }
         }];
     }
     else if (authorizationStatus == EKAuthorizationStatusAuthorized)
     {
-		// Right button for adding new reminders
-		UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
-		
-		self.navigationItem.rightBarButtonItem = rightBarButtonItem;
-		
+		[self addRigthButton];
         [self fetchData];
     }
     else
@@ -185,6 +182,14 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
     }
 }
 
+- (void)addRigthButton
+{
+	// Right button for adding new reminders
+	UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewReminder:)];
+	
+	self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+}
+
 - (void)fetchData
 {
     NSPredicate *predicate = [[[STDAppDelegate shareInstance] eventStore] predicateForRemindersInCalendars:nil];
@@ -192,6 +197,7 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
     [[[STDAppDelegate shareInstance] eventStore] fetchRemindersMatchingPredicate:predicate completion:^(NSArray *reminders) {
         self.reminderList = [[[reminders reverseObjectEnumerator] allObjects] mutableCopy];
         [self.tableView reloadData];
+		[self.tableView setNeedsLayout];
     }];
 }
 

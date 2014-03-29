@@ -27,3 +27,8 @@
 "edit_priority_segment_high" = "High";
 "edit_save" = "Save changes";
 "edit_reminder_error" = "Your reminder hasn't not been saved. there is an unkown error.";
+
+// Date Format
+"reminder_utils_just_now" = "Just Now";
+"reminder_utils_today_now" = "Today at %@";
+"reminder_utils_yesterday_now" = "Yesterday at %@";

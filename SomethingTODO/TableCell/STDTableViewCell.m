@@ -33,10 +33,10 @@
     _taskCompleted = taskCompleted;
     
     // Cell Style
-    static float alpha = 0.5f;
+    static float alpha = 0.3f;
     
-    [self.labelDate         setAlpha:taskCompleted ? alpha : 1.0f];
-    [self.labelTitle        setAlpha:taskCompleted ? alpha : 1.0f];
+    [self.dateLabel         setAlpha:taskCompleted ? alpha : 1.0f];
+    [self.titleLabel        setAlpha:taskCompleted ? alpha : 1.0f];
 }
 
 @end

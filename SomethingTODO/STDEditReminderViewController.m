@@ -95,6 +95,10 @@
 		
 		[self.titleTextField becomeFirstResponder];
 	}
+	else
+	{
+		[self saveReminderInformation];
+	}
 }
 
 #pragma mark - Helper
