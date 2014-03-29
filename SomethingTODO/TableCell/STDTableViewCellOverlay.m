@@ -8,24 +8,36 @@
 
 #import "STDTableViewCellOverlay.h"
 
+const CGFloat kSeparator = 20.0f;
+
 @implementation STDTableViewCellOverlay
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGPoint startPoint = CGPointMake(self.frame.origin.x + kSeparator, CGRectGetMidY(self.frame));
+    CGPoint endPoint = CGPointMake(self.frame.origin.x + self.frame.size.width - 1 - kSeparator, CGRectGetMidY(self.frame));
+    
+    CGContextSaveGState(context);
+    CGContextSetLineCap(context, kCGLineCapSquare);
+    CGContextSetStrokeColorWithColor(context, [[UIColor grayColor] CGColor]);
+    CGContextSetLineWidth(context, 2.0);
+    CGContextMoveToPoint(context, startPoint.x + 0.5, startPoint.y + 0.5);
+    CGContextAddLineToPoint(context, endPoint.x + 0.5, endPoint.y + 0.5);
+    CGContextStrokePath(context);
+    CGContextRestoreGState(context);
 }
-*/
 
 @end

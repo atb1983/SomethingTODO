@@ -9,10 +9,11 @@
 #import "STDViewController.h"
 #import "STDAppDelegate.h"
 #import "STDTableViewCell.h"
+#import "STDTableViewCellOverlay.h"
 
 @interface STDViewController () <UITableViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *eventList;
+@property (nonatomic, strong) NSMutableArray *reminderList;
 
 @end
 
@@ -29,7 +30,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.eventList count];
+    return [self.reminderList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -52,9 +53,40 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [self.eventList removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        if ([self removeReminder:[self.reminderList objectAtIndex:indexPath.row]])
+        {
+            [self.reminderList removeObjectAtIndex:indexPath.row];
+
+            [self.tableView beginUpdates];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView endUpdates];
+        }
     }
+}
+
+- (void)configureCell:(STDTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    EKReminder *reminder = [self.reminderList objectAtIndex:indexPath.row];
+    
+    cell.labelTitle.text = reminder.title;
+    cell.labelDescription.text = reminder.notes;
+    //    cell.labelDate.text = event.lastModifiedDate;
+    
+    cell.tag = indexPath.row;
+    
+    // Gestures
+    UISwipeGestureRecognizer *leftToRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    [leftToRightRecognizer setDirection:UISwipeGestureRecognizerDirectionLeft+UISwipeGestureRecognizerDirectionRight];
+    [cell addGestureRecognizer:leftToRightRecognizer];
+    
+    // Cell Style
+    static float alpha = 0.5f;
+    [cell.labelDate         setAlpha:reminder.isCompleted ? 1.0f : alpha];
+    [cell.labelDescription  setAlpha:reminder.isCompleted ? 1.0f : alpha];
+    [cell.labelTitle        setAlpha:reminder.isCompleted ? 1.0f : alpha];
+    
+    // When the reminder is completed we draw an stroke in the middle of the cell
+    cell.taskCompleted = reminder.isCompleted;
 }
 
 #pragma mark - Segue
@@ -63,7 +95,7 @@
 {
     if ([[segue identifier] isEqualToString:@"editEvent"])
     {
-//        [[segue destinationViewController] setDetailItem:object];
+        //        [[segue destinationViewController] setDetailItem:object];
     }
 }
 
@@ -73,13 +105,15 @@
 {
     BOOL needsToRequestAccessToEventStore = NO;
     EKAuthorizationStatus authorizationStatus = EKAuthorizationStatusAuthorized;
-    if ([[EKEventStore class] respondsToSelector:@selector(authorizationStatusForEntityType:)]) {
-        authorizationStatus = [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent];
+    if ([[EKEventStore class] respondsToSelector:@selector(authorizationStatusForEntityType:)])
+    {
+        authorizationStatus = [EKEventStore authorizationStatusForEntityType:EKEntityTypeReminder];
         needsToRequestAccessToEventStore = (authorizationStatus == EKAuthorizationStatusNotDetermined);
     }
     
-    if (needsToRequestAccessToEventStore) {
-        [[STDAppDelegate shareInstance].eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+    if (needsToRequestAccessToEventStore)
+    {
+        [[STDAppDelegate shareInstance].eventStore requestAccessToEntityType:EKEntityTypeReminder completion:^(BOOL granted, NSError *error) {
             if (granted) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // We can use the event store now
@@ -87,10 +121,12 @@
                 });
             }
         }];
-    } else if (authorizationStatus == EKAuthorizationStatusAuthorized)
+    }
+    else if (authorizationStatus == EKAuthorizationStatusAuthorized)
     {
         [self fetchData];
-    } else
+    }
+    else
     {
         // Access denied
     }
@@ -98,89 +134,105 @@
 
 - (void)fetchData
 {
-    // We ask for permission
+    NSPredicate *predicate = [[[STDAppDelegate shareInstance] eventStore] predicateForRemindersInCalendars:nil];
     
-    // Get the appropriate calendar
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    // Create the start date components
-    NSDateComponents *oneDayAgoComponents = [[NSDateComponents alloc] init];
-    oneDayAgoComponents.day = -1;
-
-    NSDate *oneDayAgo = [calendar dateByAddingComponents:oneDayAgoComponents
-                                                  toDate:[NSDate date]
-                                                 options:0];
-    
-    // Create the end date components
-    NSDateComponents *oneYearFromNowComponents = [[NSDateComponents alloc] init];
-    oneYearFromNowComponents.year = 1;
-    NSDate *oneYearFromNow = [calendar dateByAddingComponents:oneYearFromNowComponents
-                                                       toDate:[NSDate date]
-                                                      options:0];
-    // Create the predicate from the event store's instance method
-    NSPredicate *predicate = [[STDAppDelegate shareInstance].eventStore predicateForEventsWithStartDate:oneDayAgo
-                                                                                                endDate:oneYearFromNow
-                                                                                              calendars:nil];
-    
-    self.eventList = [[[STDAppDelegate shareInstance].eventStore eventsMatchingPredicate:predicate] mutableCopy];
-    
-    [self.tableView reloadData];
+    [[[STDAppDelegate shareInstance] eventStore] fetchRemindersMatchingPredicate:predicate completion:^(NSArray *reminders) {
+        self.reminderList = [reminders mutableCopy];
+        [self.tableView reloadData];
+    }];
 }
 
-- (void)configureCell:(STDTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+-(void)handleSwipe:(UISwipeGestureRecognizer *)sender
 {
-    EKEvent *event = [self.eventList objectAtIndex:indexPath.row];
+    STDTableViewCell *cell = (STDTableViewCell *)sender.view;
+    EKReminder *reminder = [self.reminderList objectAtIndex:cell.tag];
+    reminder.completed = !reminder.isCompleted;
     
-    cell.labelTitle.text = event.title;
-    cell.labelDescription.text = event.notes;
-//    cell.labelDate.text = event.lastModifiedDate;
-    
+    // We update the reminder
+    if ([self saveReminderToStore:reminder])
+    {
+        [self.tableView beginUpdates];
+        NSArray *reloadIndexPath = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:cell.tag inSection:0]];
+        [self.tableView reloadRowsAtIndexPaths:reloadIndexPath withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
+    }
 }
 
--(void)eventAddToiCal:(NSString *)title notes:(NSString *)notes startDate:(NSDate *)startDate
+- (BOOL)addReminderToStoreWithTitle:(NSString *)title notes:(NSString *)notes
 {
+    BOOL result;
+    
     if(title == 0)
     {
-        // TODO
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Enter Data" message:@"Please enter data into fields" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
     }
     else
     {
-        EKEvent *event = [EKEvent eventWithEventStore:[STDAppDelegate shareInstance].eventStore];
-//        event.startDate = startDate;
-        event.title = title;
-//        event.location = txtLocation.text;
-//        event.endDate = endDate;
-        event.notes = notes;
+        EKReminder *reminder = [EKReminder reminderWithEventStore:[STDAppDelegate shareInstance].eventStore];
+        [reminder setTitle:title];
+        [reminder setNotes:notes];
+        [reminder setCalendar:[[STDAppDelegate shareInstance].eventStore defaultCalendarForNewReminders]];
 
-//        // Try to save the event
-        [event setCalendar:[[STDAppDelegate shareInstance].eventStore defaultCalendarForNewEvents]];
-        NSError *error = nil;
+        // We store the new reminder
+        if ([self saveReminderToStore:reminder])
+        {
+            [self.reminderList addObject:reminder];
 
-        [[STDAppDelegate shareInstance].eventStore saveEvent:event span:EKSpanThisEvent error:&error];
-        
-        if (error)
-        {
-            // TODO
-        }
-        else
-        {
-            [self.eventList addObject:event];
+            [self.tableView beginUpdates];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView endUpdates];
+            
+            result = YES;
         }
     }
+    
+    return result;
 }
 
-// Inserts a new object into the _objects array.
-- (void)insertNewObject:(id)sender
+- (BOOL)saveReminderToStore:(EKReminder *)reminder
 {
-	if (!self.eventList)
-    {
-		self.eventList = [[NSMutableArray alloc] init];
-	}
+    BOOL result;
     
-	[self.eventList insertObject:[NSDate date] atIndex:0];
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-	[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSError *error = nil;
+    
+    [[STDAppDelegate shareInstance].eventStore saveReminder:reminder commit:YES error:&error];
+    
+    if (error)
+    {
+        // TODO
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"We are not able to save your reminder, try again" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else
+    {
+        result = YES;
+    }
+    
+    return result;
+}
+
+- (BOOL)removeReminder:(EKReminder *)reminder
+{
+    BOOL result;
+
+    NSError *error = nil;
+    
+    [[STDAppDelegate shareInstance].eventStore removeReminder:reminder commit:YES error:&error];
+    
+    if (error)
+    {
+        // TODO
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"We are not able to remove your reminder, try again" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else
+    {
+        result = YES;
+    }
+    
+    return result;
 }
 
 @end

@@ -23,6 +23,7 @@
 		789DF8D418E6145E00DE045D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF8D318E6145E00DE045D /* EventKit.framework */; };
 		789DF8D918E6190300DE045D /* STDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF8D718E6190300DE045D /* STDTableViewCell.m */; };
 		789DF8DD18E61D1C00DE045D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 789DF8DF18E61D1C00DE045D /* Localizable.strings */; };
+		789DF92C18E6A20500DE045D /* STDTableViewCellOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF92B18E6A20500DE045D /* STDTableViewCellOverlay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		789DF8D618E6190300DE045D /* STDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDTableViewCell.h; path = TableCell/STDTableViewCell.h; sourceTree = "<group>"; };
 		789DF8D718E6190300DE045D /* STDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDTableViewCell.m; path = TableCell/STDTableViewCell.m; sourceTree = "<group>"; };
 		789DF8DE18E61D1C00DE045D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		789DF92A18E6A20500DE045D /* STDTableViewCellOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDTableViewCellOverlay.h; path = TableCell/STDTableViewCellOverlay.h; sourceTree = "<group>"; };
+		789DF92B18E6A20500DE045D /* STDTableViewCellOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDTableViewCellOverlay.m; path = TableCell/STDTableViewCellOverlay.m; sourceTree = "<group>"; };
 		7F9446A0852240B8B0E6540C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B1DFFE06A69E4FF0BE7231A0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -150,6 +153,8 @@
 			children = (
 				789DF8D618E6190300DE045D /* STDTableViewCell.h */,
 				789DF8D718E6190300DE045D /* STDTableViewCell.m */,
+				789DF92A18E6A20500DE045D /* STDTableViewCellOverlay.h */,
+				789DF92B18E6A20500DE045D /* STDTableViewCellOverlay.m */,
 			);
 			name = TableCell;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				789DF8B518E60D8200DE045D /* STDViewController.m in Sources */,
+				789DF92C18E6A20500DE045D /* STDTableViewCellOverlay.m in Sources */,
 				789DF8AF18E60D8200DE045D /* STDAppDelegate.m in Sources */,
 				789DF8AB18E60D8200DE045D /* main.m in Sources */,
 				789DF8D918E6190300DE045D /* STDTableViewCell.m in Sources */,

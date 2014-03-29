@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface STDTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labelDescription;
 @property (weak, nonatomic) IBOutlet UILabel *labelDate;
+
+@property (assign, nonatomic) BOOL taskCompleted;
 
 @end
