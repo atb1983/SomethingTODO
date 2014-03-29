@@ -15,29 +15,18 @@
 		789DF8AB18E60D8200DE045D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF8AA18E60D8200DE045D /* main.m */; };
 		789DF8AF18E60D8200DE045D /* STDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF8AE18E60D8200DE045D /* STDAppDelegate.m */; };
 		789DF8B218E60D8200DE045D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789DF8B018E60D8200DE045D /* Main.storyboard */; };
-		789DF8B518E60D8200DE045D /* STDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF8B418E60D8200DE045D /* STDViewController.m */; };
+		789DF8B518E60D8200DE045D /* STDTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF8B418E60D8200DE045D /* STDTableViewController.m */; };
 		789DF8B718E60D8200DE045D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789DF8B618E60D8200DE045D /* Images.xcassets */; };
-		789DF8BE18E60D8200DE045D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF8BD18E60D8200DE045D /* XCTest.framework */; };
-		789DF8BF18E60D8200DE045D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF89E18E60D8200DE045D /* Foundation.framework */; };
-		789DF8C018E60D8200DE045D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF8A218E60D8200DE045D /* UIKit.framework */; };
 		789DF8D418E6145E00DE045D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF8D318E6145E00DE045D /* EventKit.framework */; };
 		789DF8D918E6190300DE045D /* STDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF8D718E6190300DE045D /* STDTableViewCell.m */; };
 		789DF8DD18E61D1C00DE045D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 789DF8DF18E61D1C00DE045D /* Localizable.strings */; };
 		789DF92C18E6A20500DE045D /* STDTableViewCellOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF92B18E6A20500DE045D /* STDTableViewCellOverlay.m */; };
+		789DF93318E6D62500DE045D /* STDEditReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF93218E6D62500DE045D /* STDEditReminderViewController.m */; };
+		789DF93718E6E40F00DE045D /* STDReminderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF93618E6E40F00DE045D /* STDReminderUtils.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		789DF8C118E60D8200DE045D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 789DF89318E60D8200DE045D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 789DF89A18E60D8200DE045D;
-			remoteInfo = SomethingTODO;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		789DF89B18E60D8200DE045D /* SomethingTODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomethingTODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		789DF89B18E60D8200DE045D /* SToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789DF89E18E60D8200DE045D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		789DF8A018E60D8200DE045D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		789DF8A218E60D8200DE045D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -48,10 +37,9 @@
 		789DF8AD18E60D8200DE045D /* STDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDAppDelegate.h; sourceTree = "<group>"; };
 		789DF8AE18E60D8200DE045D /* STDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDAppDelegate.m; sourceTree = "<group>"; };
 		789DF8B118E60D8200DE045D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		789DF8B318E60D8200DE045D /* STDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDViewController.h; sourceTree = "<group>"; };
-		789DF8B418E60D8200DE045D /* STDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDViewController.m; sourceTree = "<group>"; };
+		789DF8B318E60D8200DE045D /* STDTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDTableViewController.h; sourceTree = "<group>"; };
+		789DF8B418E60D8200DE045D /* STDTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDTableViewController.m; sourceTree = "<group>"; };
 		789DF8B618E60D8200DE045D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		789DF8BC18E60D8200DE045D /* SomethingTODOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SomethingTODOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		789DF8BD18E60D8200DE045D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		789DF8D318E6145E00DE045D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		789DF8D618E6190300DE045D /* STDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDTableViewCell.h; path = TableCell/STDTableViewCell.h; sourceTree = "<group>"; };
@@ -59,6 +47,10 @@
 		789DF8DE18E61D1C00DE045D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		789DF92A18E6A20500DE045D /* STDTableViewCellOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDTableViewCellOverlay.h; path = TableCell/STDTableViewCellOverlay.h; sourceTree = "<group>"; };
 		789DF92B18E6A20500DE045D /* STDTableViewCellOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDTableViewCellOverlay.m; path = TableCell/STDTableViewCellOverlay.m; sourceTree = "<group>"; };
+		789DF93118E6D62500DE045D /* STDEditReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDEditReminderViewController.h; sourceTree = "<group>"; };
+		789DF93218E6D62500DE045D /* STDEditReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDEditReminderViewController.m; sourceTree = "<group>"; };
+		789DF93518E6E40F00DE045D /* STDReminderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDReminderUtils.h; path = Utils/STDReminderUtils.h; sourceTree = "<group>"; };
+		789DF93618E6E40F00DE045D /* STDReminderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDReminderUtils.m; path = Utils/STDReminderUtils.m; sourceTree = "<group>"; };
 		7F9446A0852240B8B0E6540C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B1DFFE06A69E4FF0BE7231A0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -73,16 +65,6 @@
 				789DF8A318E60D8200DE045D /* UIKit.framework in Frameworks */,
 				789DF89F18E60D8200DE045D /* Foundation.framework in Frameworks */,
 				2F2121312FA74AD98B4304EB /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		789DF8B918E60D8200DE045D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				789DF8BE18E60D8200DE045D /* XCTest.framework in Frameworks */,
-				789DF8C018E60D8200DE045D /* UIKit.framework in Frameworks */,
-				789DF8BF18E60D8200DE045D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,8 +84,7 @@
 		789DF89C18E60D8200DE045D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				789DF89B18E60D8200DE045D /* SomethingTODO.app */,
-				789DF8BC18E60D8200DE045D /* SomethingTODOTests.xctest */,
+				789DF89B18E60D8200DE045D /* SToDo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,12 +105,15 @@
 		789DF8A418E60D8200DE045D /* SomethingTODO */ = {
 			isa = PBXGroup;
 			children = (
+				789DF93418E6E3F900DE045D /* Utils */,
 				789DF8D518E618E600DE045D /* TableCell */,
 				789DF8AD18E60D8200DE045D /* STDAppDelegate.h */,
 				789DF8AE18E60D8200DE045D /* STDAppDelegate.m */,
 				789DF8B018E60D8200DE045D /* Main.storyboard */,
-				789DF8B318E60D8200DE045D /* STDViewController.h */,
-				789DF8B418E60D8200DE045D /* STDViewController.m */,
+				789DF8B318E60D8200DE045D /* STDTableViewController.h */,
+				789DF8B418E60D8200DE045D /* STDTableViewController.m */,
+				789DF93118E6D62500DE045D /* STDEditReminderViewController.h */,
+				789DF93218E6D62500DE045D /* STDEditReminderViewController.m */,
 				789DF8B618E60D8200DE045D /* Images.xcassets */,
 				789DF8A518E60D8200DE045D /* Supporting Files */,
 			);
@@ -159,6 +143,15 @@
 			name = TableCell;
 			sourceTree = "<group>";
 		};
+		789DF93418E6E3F900DE045D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				789DF93518E6E40F00DE045D /* STDReminderUtils.h */,
+				789DF93618E6E40F00DE045D /* STDReminderUtils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -178,26 +171,8 @@
 			);
 			name = SomethingTODO;
 			productName = SomethingTODO;
-			productReference = 789DF89B18E60D8200DE045D /* SomethingTODO.app */;
+			productReference = 789DF89B18E60D8200DE045D /* SToDo.app */;
 			productType = "com.apple.product-type.application";
-		};
-		789DF8BB18E60D8200DE045D /* SomethingTODOTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 789DF8D018E60D8200DE045D /* Build configuration list for PBXNativeTarget "SomethingTODOTests" */;
-			buildPhases = (
-				789DF8B818E60D8200DE045D /* Sources */,
-				789DF8B918E60D8200DE045D /* Frameworks */,
-				789DF8BA18E60D8200DE045D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				789DF8C218E60D8200DE045D /* PBXTargetDependency */,
-			);
-			name = SomethingTODOTests;
-			productName = SomethingTODOTests;
-			productReference = 789DF8BC18E60D8200DE045D /* SomethingTODOTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -208,11 +183,6 @@
 				CLASSPREFIX = STD;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Alex Franco";
-				TargetAttributes = {
-					789DF8BB18E60D8200DE045D = {
-						TestTargetID = 789DF89A18E60D8200DE045D;
-					};
-				};
 			};
 			buildConfigurationList = 789DF89618E60D8200DE045D /* Build configuration list for PBXProject "SomethingTODO" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -228,7 +198,6 @@
 			projectRoot = "";
 			targets = (
 				789DF89A18E60D8200DE045D /* SomethingTODO */,
-				789DF8BB18E60D8200DE045D /* SomethingTODOTests */,
 			);
 		};
 /* End PBXProject section */
@@ -242,13 +211,6 @@
 				789DF8DD18E61D1C00DE045D /* Localizable.strings in Resources */,
 				789DF8A918E60D8200DE045D /* InfoPlist.strings in Resources */,
 				789DF8B218E60D8200DE045D /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		789DF8BA18E60D8200DE045D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +254,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				789DF8B518E60D8200DE045D /* STDViewController.m in Sources */,
+				789DF93318E6D62500DE045D /* STDEditReminderViewController.m in Sources */,
+				789DF93718E6E40F00DE045D /* STDReminderUtils.m in Sources */,
+				789DF8B518E60D8200DE045D /* STDTableViewController.m in Sources */,
 				789DF92C18E6A20500DE045D /* STDTableViewCellOverlay.m in Sources */,
 				789DF8AF18E60D8200DE045D /* STDAppDelegate.m in Sources */,
 				789DF8AB18E60D8200DE045D /* main.m in Sources */,
@@ -300,22 +264,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		789DF8B818E60D8200DE045D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		789DF8C218E60D8200DE045D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 789DF89A18E60D8200DE045D /* SomethingTODO */;
-			targetProxy = 789DF8C118E60D8200DE045D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		789DF8A718E60D8200DE045D /* InfoPlist.strings */ = {
@@ -424,7 +373,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
 				INFOPLIST_FILE = "SomethingTODO/SomethingTODO-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SToDo;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -439,49 +388,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
 				INFOPLIST_FILE = "SomethingTODO/SomethingTODO-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SToDo;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		789DF8D118E60D8200DE045D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SomethingTODO.app/SomethingTODO";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "SomethingTODOTests/SomethingTODOTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		789DF8D218E60D8200DE045D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SomethingTODO.app/SomethingTODO";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
-				INFOPLIST_FILE = "SomethingTODOTests/SomethingTODOTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -502,15 +411,6 @@
 			buildConfigurations = (
 				789DF8CE18E60D8200DE045D /* Debug */,
 				789DF8CF18E60D8200DE045D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		789DF8D018E60D8200DE045D /* Build configuration list for PBXNativeTarget "SomethingTODOTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				789DF8D118E60D8200DE045D /* Debug */,
-				789DF8D218E60D8200DE045D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -6,23 +6,32 @@
 //  Copyright (c) 2014 Alex Franco. All rights reserved.
 //
 
-#import "STDViewController.h"
+#import "STDTableViewController.h"
 #import "STDAppDelegate.h"
 #import "STDTableViewCell.h"
-#import "STDTableViewCellOverlay.h"
+#import "STDEditReminderViewController.h"
+#import "STDReminderUtils.h"
 
-@interface STDViewController () <UITableViewDelegate>
+static NSString *kTableViewCellIdentifier = @"STDTableViewCell";
+static NSString *kSegueGoToEditReminder = @"editReminder";
+
+@interface STDTableViewController () <UITableViewDelegate , STDEditReminderViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *reminderList;
+@property (nonatomic, strong) NSIndexPath *currentIndexPath;
 
 @end
 
-@implementation STDViewController
+@implementation STDTableViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
+
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+
     [self requestAccess];
 }
 
@@ -35,13 +44,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    STDTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"STDTableViewCell" forIndexPath:indexPath];
+    STDTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewCellIdentifier forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.currentIndexPath = indexPath;
+    
+    [self performSegueWithIdentifier:kSegueGoToEditReminder sender:[self.reminderList objectAtIndex:indexPath.row]];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -53,7 +65,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        if ([self removeReminder:[self.reminderList objectAtIndex:indexPath.row]])
+        if ([STDReminderUtils removeReminder:[self.reminderList objectAtIndex:indexPath.row]])
         {
             [self.reminderList removeObjectAtIndex:indexPath.row];
 
@@ -85,17 +97,48 @@
     [cell.labelDescription  setAlpha:reminder.isCompleted ? 1.0f : alpha];
     [cell.labelTitle        setAlpha:reminder.isCompleted ? 1.0f : alpha];
     
+    UIColor *highPriorityColor = [UIColor colorWithRed:232.0f/255.0f green:39.0f/255.0f blue:61.0/255.0f alpha:1.0];
+
+    cell.backgroundColor = reminder.priority > 0 ? highPriorityColor : [UIColor whiteColor];
+    
     // When the reminder is completed we draw an stroke in the middle of the cell
     cell.taskCompleted = reminder.isCompleted;
 }
 
+#pragma mark - STDEditReminderViewControllerDelegate
+
+- (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didSaveNewReminder:(EKReminder *)reminder
+{
+    [self.reminderList addObject:reminder];
+    
+    [self.tableView beginUpdates];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
+- (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didModifiedNeminder:(EKReminder *)reminder
+{
+    [self.tableView beginUpdates];
+    NSArray *reloadIndexPath = [NSArray arrayWithObject:self.currentIndexPath];
+    [self.tableView reloadRowsAtIndexPaths:reloadIndexPath withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
+}
+
 #pragma mark - Segue
+
+- (void)addNewItem:(UIEvent *)event
+{
+    [self performSegueWithIdentifier:kSegueGoToEditReminder sender:nil];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"editEvent"])
+    if ([[segue identifier] isEqualToString:kSegueGoToEditReminder])
     {
-        //        [[segue destinationViewController] setDetailItem:object];
+        STDEditReminderViewController *vc = (STDEditReminderViewController *)[segue destinationViewController];
+        vc.delegate = self;
+        [vc setCurrentReminder:sender];
     }
 }
 
@@ -149,7 +192,7 @@
     reminder.completed = !reminder.isCompleted;
     
     // We update the reminder
-    if ([self saveReminderToStore:reminder])
+    if ([STDReminderUtils saveReminderToStore:reminder])
     {
         [self.tableView beginUpdates];
         NSArray *reloadIndexPath = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:cell.tag inSection:0]];
@@ -175,7 +218,7 @@
         [reminder setCalendar:[[STDAppDelegate shareInstance].eventStore defaultCalendarForNewReminders]];
 
         // We store the new reminder
-        if ([self saveReminderToStore:reminder])
+        if ([STDReminderUtils saveReminderToStore:reminder])
         {
             [self.reminderList addObject:reminder];
 
@@ -186,50 +229,6 @@
             
             result = YES;
         }
-    }
-    
-    return result;
-}
-
-- (BOOL)saveReminderToStore:(EKReminder *)reminder
-{
-    BOOL result;
-    
-    NSError *error = nil;
-    
-    [[STDAppDelegate shareInstance].eventStore saveReminder:reminder commit:YES error:&error];
-    
-    if (error)
-    {
-        // TODO
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"We are not able to save your reminder, try again" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
-        result = YES;
-    }
-    
-    return result;
-}
-
-- (BOOL)removeReminder:(EKReminder *)reminder
-{
-    BOOL result;
-
-    NSError *error = nil;
-    
-    [[STDAppDelegate shareInstance].eventStore removeReminder:reminder commit:YES error:&error];
-    
-    if (error)
-    {
-        // TODO
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"We are not able to remove your reminder, try again" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
-        result = YES;
     }
     
     return result;

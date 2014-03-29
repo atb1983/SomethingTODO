@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STDEditReminderViewController : UIVewController
+@class STDEditReminderViewController;
+
+@protocol STDEditReminderViewControllerDelegate <NSObject>
+
+@required
+
+- (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didSaveNewReminder:(EKReminder *)reminder;
+- (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didModifiedNeminder:(EKReminder *)reminder;
+
+@end
+
+
+@interface STDEditReminderViewController : UIViewController
+
+@property (weak) id <STDEditReminderViewControllerDelegate> delegate;
+
+@property (strong, nonatomic) EKReminder *currentReminder;
 
 @end
