@@ -12,7 +12,7 @@
 
 @interface STDViewController () <UITableViewDelegate>
 
-@property (nonatomic, strong) NSArray *eventList;
+@property (nonatomic, strong) NSMutableArray *eventList;
 
 @end
 
@@ -22,6 +22,55 @@
 {
     [super viewDidLoad];
     
+    [self requestAccess];
+}
+
+#pragma mark - UITableViewDelegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.eventList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    STDTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"STDTableViewCell" forIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+	return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return UITableViewCellEditingStyleDelete;
+}
+
+// Swipe to delete.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self.eventList removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"editEvent"])
+    {
+//        [[segue destinationViewController] setDetailItem:object];
+    }
+}
+
+#pragma mark - Helpers
+
+- (void)requestAccess
+{
     BOOL needsToRequestAccessToEventStore = NO;
     EKAuthorizationStatus authorizationStatus = EKAuthorizationStatusAuthorized;
     if ([[EKEventStore class] respondsToSelector:@selector(authorizationStatusForEntityType:)]) {
@@ -46,29 +95,6 @@
         // Access denied
     }
 }
-
-#pragma mark - UITableViewDelegate
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.eventList count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    STDTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"STDTableViewCell" forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
-    return cell;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"editEvent"]) {
-//        [[segue destinationViewController] setDetailItem:object];
-    }
-}
-
-#pragma mark - Helpers
 
 - (void)fetchData
 {
@@ -95,7 +121,7 @@
                                                                                                 endDate:oneYearFromNow
                                                                                               calendars:nil];
     
-    self.eventList = [[STDAppDelegate shareInstance].eventStore eventsMatchingPredicate:predicate];
+    self.eventList = [[[STDAppDelegate shareInstance].eventStore eventsMatchingPredicate:predicate] mutableCopy];
     
     [self.tableView reloadData];
 }
@@ -105,8 +131,56 @@
     EKEvent *event = [self.eventList objectAtIndex:indexPath.row];
     
     cell.labelTitle.text = event.title;
-    cell.labelDescription.text = event.description;
+    cell.labelDescription.text = event.notes;
 //    cell.labelDate.text = event.lastModifiedDate;
+    
+}
+
+-(void)eventAddToiCal:(NSString *)title notes:(NSString *)notes startDate:(NSDate *)startDate
+{
+    if(title == 0)
+    {
+        // TODO
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Enter Data" message:@"Please enter data into fields" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else
+    {
+        EKEvent *event = [EKEvent eventWithEventStore:[STDAppDelegate shareInstance].eventStore];
+//        event.startDate = startDate;
+        event.title = title;
+//        event.location = txtLocation.text;
+//        event.endDate = endDate;
+        event.notes = notes;
+
+//        // Try to save the event
+        [event setCalendar:[[STDAppDelegate shareInstance].eventStore defaultCalendarForNewEvents]];
+        NSError *error = nil;
+
+        [[STDAppDelegate shareInstance].eventStore saveEvent:event span:EKSpanThisEvent error:&error];
+        
+        if (error)
+        {
+            // TODO
+        }
+        else
+        {
+            [self.eventList addObject:event];
+        }
+    }
+}
+
+// Inserts a new object into the _objects array.
+- (void)insertNewObject:(id)sender
+{
+	if (!self.eventList)
+    {
+		self.eventList = [[NSMutableArray alloc] init];
+	}
+    
+	[self.eventList insertObject:[NSDate date] atIndex:0];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+	[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end
