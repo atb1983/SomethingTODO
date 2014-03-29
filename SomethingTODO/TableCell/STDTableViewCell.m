@@ -28,9 +28,15 @@
 
 - (void)setTaskCompleted:(BOOL)taskCompleted
 {
-    [self.overlayView setHidden:taskCompleted];
+    [self.overlayView setHidden:!taskCompleted];
     
     _taskCompleted = taskCompleted;
+    
+    // Cell Style
+    static float alpha = 0.5f;
+    
+    [self.labelDate         setAlpha:taskCompleted ? alpha : 1.0f];
+    [self.labelTitle        setAlpha:taskCompleted ? alpha : 1.0f];
 }
 
 @end

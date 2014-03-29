@@ -23,6 +23,8 @@
 		789DF92C18E6A20500DE045D /* STDTableViewCellOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF92B18E6A20500DE045D /* STDTableViewCellOverlay.m */; };
 		789DF93318E6D62500DE045D /* STDEditReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF93218E6D62500DE045D /* STDEditReminderViewController.m */; };
 		789DF93718E6E40F00DE045D /* STDReminderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF93618E6E40F00DE045D /* STDReminderUtils.m */; };
+		789DF93B18E70F5200DE045D /* UITextField+ExtraPadding.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF93A18E70F5200DE045D /* UITextField+ExtraPadding.m */; };
+		789DF93E18E7105A00DE045D /* UIView+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF93D18E7105A00DE045D /* UIView+Border.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,10 @@
 		789DF93218E6D62500DE045D /* STDEditReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDEditReminderViewController.m; sourceTree = "<group>"; };
 		789DF93518E6E40F00DE045D /* STDReminderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDReminderUtils.h; path = Utils/STDReminderUtils.h; sourceTree = "<group>"; };
 		789DF93618E6E40F00DE045D /* STDReminderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDReminderUtils.m; path = Utils/STDReminderUtils.m; sourceTree = "<group>"; };
+		789DF93918E70F5200DE045D /* UITextField+ExtraPadding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+ExtraPadding.h"; path = "Categories/UITextField+ExtraPadding.h"; sourceTree = "<group>"; };
+		789DF93A18E70F5200DE045D /* UITextField+ExtraPadding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+ExtraPadding.m"; path = "Categories/UITextField+ExtraPadding.m"; sourceTree = "<group>"; };
+		789DF93C18E7105A00DE045D /* UIView+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Border.h"; path = "Categories/UIView+Border.h"; sourceTree = "<group>"; };
+		789DF93D18E7105A00DE045D /* UIView+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Border.m"; path = "Categories/UIView+Border.m"; sourceTree = "<group>"; };
 		7F9446A0852240B8B0E6540C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B1DFFE06A69E4FF0BE7231A0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -105,6 +111,7 @@
 		789DF8A418E60D8200DE045D /* SomethingTODO */ = {
 			isa = PBXGroup;
 			children = (
+				789DF93818E70F2600DE045D /* Categories */,
 				789DF93418E6E3F900DE045D /* Utils */,
 				789DF8D518E618E600DE045D /* TableCell */,
 				789DF8AD18E60D8200DE045D /* STDAppDelegate.h */,
@@ -150,6 +157,17 @@
 				789DF93618E6E40F00DE045D /* STDReminderUtils.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		789DF93818E70F2600DE045D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				789DF93918E70F5200DE045D /* UITextField+ExtraPadding.h */,
+				789DF93A18E70F5200DE045D /* UITextField+ExtraPadding.m */,
+				789DF93C18E7105A00DE045D /* UIView+Border.h */,
+				789DF93D18E7105A00DE045D /* UIView+Border.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,9 +274,11 @@
 			files = (
 				789DF93318E6D62500DE045D /* STDEditReminderViewController.m in Sources */,
 				789DF93718E6E40F00DE045D /* STDReminderUtils.m in Sources */,
+				789DF93B18E70F5200DE045D /* UITextField+ExtraPadding.m in Sources */,
 				789DF8B518E60D8200DE045D /* STDTableViewController.m in Sources */,
 				789DF92C18E6A20500DE045D /* STDTableViewCellOverlay.m in Sources */,
 				789DF8AF18E60D8200DE045D /* STDAppDelegate.m in Sources */,
+				789DF93E18E7105A00DE045D /* UIView+Border.m in Sources */,
 				789DF8AB18E60D8200DE045D /* main.m in Sources */,
 				789DF8D918E6190300DE045D /* STDTableViewCell.m in Sources */,
 			);

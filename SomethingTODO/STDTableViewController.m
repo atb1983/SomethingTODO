@@ -80,8 +80,12 @@ static NSString *kSegueGoToEditReminder = @"editReminder";
 {
     EKReminder *reminder = [self.reminderList objectAtIndex:indexPath.row];
     
+    UIColor *highPriorityColor = [UIColor colorWithRed:232.0f/255.0f green:39.0f/255.0f blue:61.0/255.0f alpha:1.0];
+    cell.backgroundColor = reminder.priority > 0 ? highPriorityColor : [UIColor whiteColor];
+
     cell.labelTitle.text = reminder.title;
-    cell.labelDescription.text = reminder.notes;
+    cell.labelTitle.textColor = reminder.priority > 0 ? [UIColor whiteColor] : [UIColor blackColor];
+    cell.labelDate.textColor = reminder.priority > 0 ? [UIColor whiteColor] : [UIColor blackColor];
     //    cell.labelDate.text = event.lastModifiedDate;
     
     cell.tag = indexPath.row;
@@ -91,16 +95,6 @@ static NSString *kSegueGoToEditReminder = @"editReminder";
     [leftToRightRecognizer setDirection:UISwipeGestureRecognizerDirectionLeft+UISwipeGestureRecognizerDirectionRight];
     [cell addGestureRecognizer:leftToRightRecognizer];
     
-    // Cell Style
-    static float alpha = 0.5f;
-    [cell.labelDate         setAlpha:reminder.isCompleted ? 1.0f : alpha];
-    [cell.labelDescription  setAlpha:reminder.isCompleted ? 1.0f : alpha];
-    [cell.labelTitle        setAlpha:reminder.isCompleted ? 1.0f : alpha];
-    
-    UIColor *highPriorityColor = [UIColor colorWithRed:232.0f/255.0f green:39.0f/255.0f blue:61.0/255.0f alpha:1.0];
-
-    cell.backgroundColor = reminder.priority > 0 ? highPriorityColor : [UIColor whiteColor];
-    
     // When the reminder is completed we draw an stroke in the middle of the cell
     cell.taskCompleted = reminder.isCompleted;
 }
@@ -109,12 +103,15 @@ static NSString *kSegueGoToEditReminder = @"editReminder";
 
 - (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didSaveNewReminder:(EKReminder *)reminder
 {
-    [self.reminderList addObject:reminder];
+    [self.reminderList insertObject:reminder atIndex:0];
     
     [self.tableView beginUpdates];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.tableView endUpdates];
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Reminder" message:@"New reminder added to your list" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 - (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didModifiedNeminder:(EKReminder *)reminder
@@ -123,6 +120,9 @@ static NSString *kSegueGoToEditReminder = @"editReminder";
     NSArray *reloadIndexPath = [NSArray arrayWithObject:self.currentIndexPath];
     [self.tableView reloadRowsAtIndexPaths:reloadIndexPath withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Reminder" message:@"Your reminder is updated." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 #pragma mark - Segue
@@ -180,7 +180,7 @@ static NSString *kSegueGoToEditReminder = @"editReminder";
     NSPredicate *predicate = [[[STDAppDelegate shareInstance] eventStore] predicateForRemindersInCalendars:nil];
     
     [[[STDAppDelegate shareInstance] eventStore] fetchRemindersMatchingPredicate:predicate completion:^(NSArray *reminders) {
-        self.reminderList = [reminders mutableCopy];
+        self.reminderList = [[[reminders reverseObjectEnumerator] allObjects] mutableCopy];
         [self.tableView reloadData];
     }];
 }
@@ -199,39 +199,6 @@ static NSString *kSegueGoToEditReminder = @"editReminder";
         [self.tableView reloadRowsAtIndexPaths:reloadIndexPath withRowAnimation:UITableViewRowAnimationFade];
         [self.tableView endUpdates];
     }
-}
-
-- (BOOL)addReminderToStoreWithTitle:(NSString *)title notes:(NSString *)notes
-{
-    BOOL result;
-    
-    if(title == 0)
-    {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Enter Data" message:@"Please enter data into fields" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
-        EKReminder *reminder = [EKReminder reminderWithEventStore:[STDAppDelegate shareInstance].eventStore];
-        [reminder setTitle:title];
-        [reminder setNotes:notes];
-        [reminder setCalendar:[[STDAppDelegate shareInstance].eventStore defaultCalendarForNewReminders]];
-
-        // We store the new reminder
-        if ([STDReminderUtils saveReminderToStore:reminder])
-        {
-            [self.reminderList addObject:reminder];
-
-            [self.tableView beginUpdates];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-            [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView endUpdates];
-            
-            result = YES;
-        }
-    }
-    
-    return result;
 }
 
 @end

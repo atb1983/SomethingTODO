@@ -7,9 +7,13 @@
 //
 
 #import "STDEditReminderViewController.h"
-#import <QuartzCore/QuartzCore.h>
 #import "STDAppDelegate.h"
 #import "STDReminderUtils.h"
+
+#import "UITextField+ExtraPadding.h"
+#import "UIView+Border.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 @interface STDEditReminderViewController ()
 
@@ -64,22 +68,15 @@
     self.descriptionTextField.textColor = defaultBlue;
     self.priorityLabel.textColor = defaultBlue;
     
-    self.titleTextField.layer.cornerRadius = 5;
-    self.titleTextField.clipsToBounds = YES;
-    [self.titleTextField.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
-    [self.titleTextField.layer setBorderColor: [defaultBlue CGColor]];
-    [self.titleTextField.layer setBorderWidth: 1.0];
-    [self.titleTextField.layer setCornerRadius:8.0f];
-    [self.titleTextField.layer setMasksToBounds:YES];
+    [self.titleTextField applyBorderWithColor:defaultBlue];
+    [self.titleTextField setLeftPadding:4.0f];
+    [self.titleTextField setRightPadding:4.0f];
     
-    self.descriptionTextField.layer.cornerRadius = 5;
-    self.descriptionTextField.clipsToBounds = YES;
-    [self.descriptionTextField.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
-    [self.descriptionTextField.layer setBorderColor: [defaultBlue CGColor]];
-    [self.descriptionTextField.layer setBorderWidth: 1.0];
-    [self.descriptionTextField.layer setCornerRadius:8.0f];
-    [self.descriptionTextField.layer setMasksToBounds:YES];
+    [self.descriptionTextField applyBorderWithColor:defaultBlue];
+    
+    [self.saveChangesButton applyBorderWithColor:defaultBlue];
 }
+
 - (void)configureView
 {
     // Update the user interface for the detail item.
@@ -137,6 +134,11 @@
         }
         
         [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error Reminder" message:@"Your reminder hasn't not been saved. there is an unkown error." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
     }
 }
 
