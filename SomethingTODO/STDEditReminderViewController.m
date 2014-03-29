@@ -35,13 +35,15 @@
 {
     [super viewDidLoad];
     
-//    titleLabel.text @"";
-//    titleTextField;
-//    descriptionLabel;
-//    descriptionTextField;
-//    priorityLabel;
-//    prioritySergmentedControl;
-//    saveChangesButton;
+	// Localization
+    self.title =								NSLocalizedString(@"edit_title_vc", nil);
+    self.titleLabel.text =						NSLocalizedString(@"edit_title_label", nil);
+    self.titleTextField.placeholder =			NSLocalizedString(@"edit_title_textfield_placeholder", nil);
+    self.descriptionLabel.text =				NSLocalizedString(@"edit_description_label", nil);
+    self.priorityLabel.text =					NSLocalizedString(@"edit_priority_label", nil);
+    [self.prioritySergmentedControl setTitle:	NSLocalizedString(@"edit_priority_segment_normal", nil) forSegmentAtIndex:0];
+	[self.prioritySergmentedControl setTitle:	NSLocalizedString(@"edit_priority_segment_high", nil) forSegmentAtIndex:1];
+    [self.saveChangesButton setTitle:			NSLocalizedString(@"edit_save", nil) forState:UIControlStateNormal];
     
     // Update the view.
     [self applyStyle];

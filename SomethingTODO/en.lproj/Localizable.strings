@@ -5,3 +5,22 @@
   Created by Alex Núñez on 28/03/14.
   Copyright (c) 2014 Alex Franco. All rights reserved.
 */
+
+// Common
+"common_alertview_title" = "Reminder";
+"common_ok" = "Ok";
+
+// List Reminders VC
+"listvc_title_vc" = "Your ToDo List";
+"listvc_new_reminder_added" = "New reminder added to your list";
+"listvc_reminder_updated" = "Your reminder is updated.";
+
+// Edit Reminder VC
+"edit_title_vc" = "Reminder Details";
+"edit_title_label" = "Title";
+"edit_title_textfield_placeholder" = "Write your title";
+"edit_description_label" = "Description:";
+"edit_priority_label" = "Priority:";
+"edit_priority_segment_normal" = "Normal";
+"edit_priority_segment_high" = "High";
+"edit_save" = "Save changes";

@@ -12,13 +12,13 @@
 #import "STDEditReminderViewController.h"
 #import "STDReminderUtils.h"
 
-static NSString *kTableViewCellIdentifier = @"STDTableViewCell";
-static NSString *kSegueGoToEditReminder = @"editReminder";
+static NSString *kTableViewCellIdentifier   = @"STDTableViewCell";
+static NSString *kSegueGoToEditReminder     = @"editReminder";
 
 @interface STDTableViewController () <UITableViewDelegate , STDEditReminderViewControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray *reminderList;
-@property (nonatomic, strong) NSIndexPath *currentIndexPath;
+@property (nonatomic, strong) NSMutableArray    *reminderList;
+@property (nonatomic, strong) NSIndexPath       *currentIndexPath;
 
 @end
 
@@ -28,6 +28,9 @@ static NSString *kSegueGoToEditReminder = @"editReminder";
 {
     [super viewDidLoad];
     
+    self.title = NSLocalizedString(@"listvc_title_vc", nil);
+    
+    // Right button for adding new reminders
     UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
 
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
@@ -110,7 +113,7 @@ static NSString *kSegueGoToEditReminder = @"editReminder";
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.tableView endUpdates];
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Reminder" message:@"New reminder added to your list" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"listvc_new_reminder_added", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
     [alert show];
 }
 
@@ -121,7 +124,7 @@ static NSString *kSegueGoToEditReminder = @"editReminder";
     [self.tableView reloadRowsAtIndexPaths:reloadIndexPath withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Reminder" message:@"Your reminder is updated." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"listvc_reminder_updated", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
     [alert show];
 }
 
