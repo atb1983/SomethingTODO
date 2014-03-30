@@ -8,27 +8,42 @@
 
 #import <XCTest/XCTest.h>
 
+#import "STDAppDelegate.h"
+#import "STDReminderUtils.h"
+
 @interface STDReminderUtilsTest : XCTestCase
+
+@property (nonatomic, strong) EKReminder *reminder;
 
 @end
 
 @implementation STDReminderUtilsTest
 
-- (void)setUp
+- (void)testSaveNewReminder
 {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+	self.reminder = [EKReminder reminderWithEventStore:[STDAppDelegate shareInstance].eventStore];
+	[self.reminder setCalendar:[[STDAppDelegate shareInstance].eventStore defaultCalendarForNewReminders]];
+	
+	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+	NSCalendar *cal = [NSCalendar currentCalendar];
+	
+	[self.reminder setStartDateComponents:[cal components:unitFlags fromDate:[NSDate date]]];
+    [self.reminder setTitle:@"Test Reminder Title"];
+    [self.reminder setNotes:@"Test Description"];
+    [self.reminder setPriority:0];
+	
+	XCTAssertTrue([STDReminderUtils saveReminderToStore:self.reminder]);
 }
 
-- (void)tearDown
+- (void)testRemoveReminder
 {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
+    [self.reminder setTitle:@"Test Reminder Title Updated!"];
+	XCTAssertTrue([STDReminderUtils saveReminderToStore:self.reminder]);
 }
 
-- (void)testExample
+- (void)testUpdateReminder
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+	XCTAssertTrue([STDReminderUtils removeReminder:self.reminder]);
 }
 
 @end

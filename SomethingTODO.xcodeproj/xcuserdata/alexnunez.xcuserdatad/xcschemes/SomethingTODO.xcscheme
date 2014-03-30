@@ -38,6 +38,21 @@
                ReferencedContainer = "container:SomethingTODO.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "78CEFD4318E7FDF90014418C"
+               BuildableName = "SomethingTODO Tests.xctest"
+               BlueprintName = "SomethingTODO Tests"
+               ReferencedContainer = "container:SomethingTODO.xcodeproj">
+            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "STDEditReminderViewController">
+               </Test>
+            </SkippedTests>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
