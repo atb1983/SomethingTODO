@@ -12,8 +12,9 @@
 #import "STDEditReminderViewController.h"
 #import "STDReminderUtils.h"
 
-static NSString *kTableViewCellIdentifier   = @"STDTableViewCell";
-static NSString *kSegueGoToEditReminder     = @"editReminder";
+static NSString *kTableViewCellIdentifier		= @"STDTableViewCell";
+static NSString *kPlaceHolderCellIdentifier		= @"Cell";
+static NSString *kSegueGoToEditReminder			= @"editReminder";
 
 @interface STDTableViewController () <UITableViewDelegate , STDEditReminderViewControllerDelegate>
 
@@ -28,7 +29,7 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"listvc_title_vc", nil);
-
+	
     [self requestAccess];
 }
 
@@ -36,24 +37,51 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.reminderList count];
+	if (self.reminderList.count > 0)
+	{
+		return self.reminderList.count;
+	}
+	
+	return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    STDTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewCellIdentifier forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
+	UITableViewCell *cell;
+	
+	if (self.reminderList.count == 0)
+	{
+		// No reminders
+		cell = [tableView dequeueReusableCellWithIdentifier:kPlaceHolderCellIdentifier];
+		
+		if (cell == nil)
+		{
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPlaceHolderCellIdentifier];
+		}
+		
+		cell.textLabel.text = NSLocalizedString(@"listvc_no_reminders", nil);
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	}
+	else
+	{
+		cell = [tableView dequeueReusableCellWithIdentifier:kTableViewCellIdentifier forIndexPath:indexPath];
+		[self configureCell:(STDTableViewCell *)cell atIndexPath:indexPath];
+	}
+	
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:kSegueGoToEditReminder sender:[self.reminderList objectAtIndex:indexPath.row]];
+	if (self.reminderList.count > 0)
+	{
+		[self performSegueWithIdentifier:kSegueGoToEditReminder sender:[self.reminderList objectAtIndex:indexPath.row]];
+	}
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return UITableViewCellEditingStyleDelete;
+	return self.reminderList.count > 0 ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
 }
 
 // Swipe to delete.
@@ -64,14 +92,20 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
         if ([STDReminderUtils removeReminder:[self.reminderList objectAtIndex:indexPath.row]])
         {
 			[self.reminderList removeObjectAtIndex:indexPath.row];
-
-            [self.tableView beginUpdates];
-			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView endUpdates];
 			
-			[tableView reloadRowsAtIndexPaths:[tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-    }
+			[self.tableView beginUpdates];
+			
+			// if it's not the last row we just delete the row
+			if ([tableView numberOfRowsInSection:[indexPath section]] > 1)
+			{
+				[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+			}
+			
+			[self.tableView endUpdates];
+			
+			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationFade];
+		}
+	}
 }
 
 - (void)configureCell:(STDTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -82,7 +116,7 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
 	
     UIColor *highPriorityColor = [UIColor colorWithRed:232.0f/255.0f green:39.0f/255.0f blue:61.0/255.0f alpha:1.0];
     cell.backgroundColor = reminder.priority > 0 ? highPriorityColor : [UIColor whiteColor];
-
+	
 	UIColor *labelColor = reminder.priority > 0 ? [UIColor whiteColor] : [UIColor blackColor];
 	
     cell.titleLabel.text = reminder.title;
@@ -107,15 +141,21 @@ static NSString *kSegueGoToEditReminder     = @"editReminder";
 
 - (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didSaveNewReminder:(EKReminder *)reminder
 {
-    [self.reminderList insertObject:reminder atIndex:0];
+	[self.reminderList insertObject:reminder atIndex:0];
+	
+	[self.tableView beginUpdates];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
-    [self.tableView beginUpdates];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
-    [self.tableView endUpdates];
+	// if it's not the last row we just inser the row the place holder cell
+	if (self.reminderList.count > 1)
+	{
+		[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+	}
+	
+	[self.tableView endUpdates];
     
 	[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationFade];
-	
+
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"listvc_new_reminder_added", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
     [alert show];
 }

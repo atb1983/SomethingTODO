@@ -68,7 +68,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="go"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="go"/>
                                 <connections>
                                     <outlet property="delegate" destination="Kga-YH-SkF" id="0E5-X4-NJj"/>
                                 </connections>
@@ -79,7 +79,7 @@
                     <navigationItem key="navigationItem" title="Reminder Details" id="Snp-b6-Nok"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="RJG-QH-gqg" id="HN2-0d-nxG"/>
-                        <outlet property="descriptionTextField" destination="gPU-da-fYr" id="zW5-iE-bJ5"/>
+                        <outlet property="descriptionTextView" destination="gPU-da-fYr" id="eIV-1k-sI5"/>
                         <outlet property="priorityLabel" destination="xrK-qe-ekv" id="NXr-1g-lgc"/>
                         <outlet property="prioritySergmentedControl" destination="XjV-ti-gQb" id="YFe-Tx-gu9"/>
                         <outlet property="saveChangesButton" destination="1Ev-Qs-gms" id="ha7-e1-87Q"/>

@@ -15,6 +15,8 @@
 "listvc_new_reminder_added" = "New reminder added to your list.";
 "listvc_reminder_updated" = "Your reminder is updated.";
 "listvc_no_access" = "For using this app you must give access to your reminders. please check your settings";
+"listvc_no_reminders" = "No reminders found";
+"listvc_header" = "Incompleted Tasks (%ld)";
 
 // Edit Reminder VC
 "edit_title_vc" = "Reminder Details";
@@ -26,7 +28,8 @@
 "edit_priority_segment_normal" = "Normal";
 "edit_priority_segment_high" = "High";
 "edit_save" = "Save changes";
-"edit_reminder_error" = "Your reminder hasn't not been saved. there is an unkown error.";
+"edit_reminder_error" = "Your reminder hasn't not been saved. there is an unknown error.";
+"remove_reminder_error" = "It's not possible to remove that reminder, please try again.";
 
 // Date Format
 "reminder_utils_just_now" = "Just Now";

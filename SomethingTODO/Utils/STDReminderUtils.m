@@ -79,8 +79,7 @@
     
     if (error)
     {
-        // TODO Translate
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"We are not able to save your reminder, try again" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"edit_reminder_error", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
         [alert show];
     }
     else
@@ -101,8 +100,7 @@
     
     if (error)
     {
-        // TODO Translate
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"We are not able to remove your reminder, try again" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"remove_reminder_error", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
         [alert show];
     }
     else
