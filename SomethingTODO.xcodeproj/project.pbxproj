@@ -25,7 +25,22 @@
 		789DF93718E6E40F00DE045D /* STDReminderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF93618E6E40F00DE045D /* STDReminderUtils.m */; };
 		789DF93B18E70F5200DE045D /* UITextField+ExtraPadding.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF93A18E70F5200DE045D /* UITextField+ExtraPadding.m */; };
 		789DF93E18E7105A00DE045D /* UIView+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = 789DF93D18E7105A00DE045D /* UIView+Border.m */; };
+		78CEFD4518E7FDF90014418C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF8BD18E60D8200DE045D /* XCTest.framework */; };
+		78CEFD4618E7FDF90014418C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF89E18E60D8200DE045D /* Foundation.framework */; };
+		78CEFD4718E7FDF90014418C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF8A218E60D8200DE045D /* UIKit.framework */; };
+		78CEFD4D18E7FDFA0014418C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78CEFD4B18E7FDFA0014418C /* InfoPlist.strings */; };
+		78CEFD5918E86DF20014418C /* STDReminderUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 78CEFD5818E86DF20014418C /* STDReminderUtilsTest.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		78CEFD5118E7FDFA0014418C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 789DF89318E60D8200DE045D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 789DF89A18E60D8200DE045D;
+			remoteInfo = SomethingTODO;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		789DF89B18E60D8200DE045D /* SToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +72,11 @@
 		789DF93A18E70F5200DE045D /* UITextField+ExtraPadding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+ExtraPadding.m"; path = "Categories/UITextField+ExtraPadding.m"; sourceTree = "<group>"; };
 		789DF93C18E7105A00DE045D /* UIView+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Border.h"; path = "Categories/UIView+Border.h"; sourceTree = "<group>"; };
 		789DF93D18E7105A00DE045D /* UIView+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Border.m"; path = "Categories/UIView+Border.m"; sourceTree = "<group>"; };
+		78CEFD4418E7FDF90014418C /* SomethingTODO Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SomethingTODO Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		78CEFD4A18E7FDFA0014418C /* SomethingTODO Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SomethingTODO Tests-Info.plist"; sourceTree = "<group>"; };
+		78CEFD4C18E7FDFA0014418C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		78CEFD5018E7FDFA0014418C /* SomethingTODO Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SomethingTODO Tests-Prefix.pch"; sourceTree = "<group>"; };
+		78CEFD5818E86DF20014418C /* STDReminderUtilsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDReminderUtilsTest.m; sourceTree = "<group>"; };
 		7F9446A0852240B8B0E6540C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B1DFFE06A69E4FF0BE7231A0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -74,6 +94,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		78CEFD4118E7FDF90014418C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78CEFD4518E7FDF90014418C /* XCTest.framework in Frameworks */,
+				78CEFD4718E7FDF90014418C /* UIKit.framework in Frameworks */,
+				78CEFD4618E7FDF90014418C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				789DF8A418E60D8200DE045D /* SomethingTODO */,
+				78CEFD4818E7FDF90014418C /* SomethingTODO Tests */,
 				789DF89D18E60D8200DE045D /* Frameworks */,
 				789DF89C18E60D8200DE045D /* Products */,
 				7F9446A0852240B8B0E6540C /* Pods.xcconfig */,
@@ -91,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				789DF89B18E60D8200DE045D /* SToDo.app */,
+				78CEFD4418E7FDF90014418C /* SomethingTODO Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +202,25 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		78CEFD4818E7FDF90014418C /* SomethingTODO Tests */ = {
+			isa = PBXGroup;
+			children = (
+				78CEFD5818E86DF20014418C /* STDReminderUtilsTest.m */,
+				78CEFD4918E7FDF90014418C /* Supporting Files */,
+			);
+			path = "SomethingTODO Tests";
+			sourceTree = "<group>";
+		};
+		78CEFD4918E7FDF90014418C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				78CEFD4A18E7FDFA0014418C /* SomethingTODO Tests-Info.plist */,
+				78CEFD4B18E7FDFA0014418C /* InfoPlist.strings */,
+				78CEFD5018E7FDFA0014418C /* SomethingTODO Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -192,6 +243,24 @@
 			productReference = 789DF89B18E60D8200DE045D /* SToDo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		78CEFD4318E7FDF90014418C /* SomethingTODO Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78CEFD5518E7FDFA0014418C /* Build configuration list for PBXNativeTarget "SomethingTODO Tests" */;
+			buildPhases = (
+				78CEFD4018E7FDF90014418C /* Sources */,
+				78CEFD4118E7FDF90014418C /* Frameworks */,
+				78CEFD4218E7FDF90014418C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				78CEFD5218E7FDFA0014418C /* PBXTargetDependency */,
+			);
+			name = "SomethingTODO Tests";
+			productName = "SomethingTODO Tests";
+			productReference = 78CEFD4418E7FDF90014418C /* SomethingTODO Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -201,6 +270,11 @@
 				CLASSPREFIX = STD;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Alex Franco";
+				TargetAttributes = {
+					78CEFD4318E7FDF90014418C = {
+						TestTargetID = 789DF89A18E60D8200DE045D;
+					};
+				};
 			};
 			buildConfigurationList = 789DF89618E60D8200DE045D /* Build configuration list for PBXProject "SomethingTODO" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -216,6 +290,7 @@
 			projectRoot = "";
 			targets = (
 				789DF89A18E60D8200DE045D /* SomethingTODO */,
+				78CEFD4318E7FDF90014418C /* SomethingTODO Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -229,6 +304,14 @@
 				789DF8DD18E61D1C00DE045D /* Localizable.strings in Resources */,
 				789DF8A918E60D8200DE045D /* InfoPlist.strings in Resources */,
 				789DF8B218E60D8200DE045D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78CEFD4218E7FDF90014418C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78CEFD4D18E7FDFA0014418C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +367,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		78CEFD4018E7FDF90014418C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78CEFD5918E86DF20014418C /* STDReminderUtilsTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		78CEFD5218E7FDFA0014418C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 789DF89A18E60D8200DE045D /* SomethingTODO */;
+			targetProxy = 78CEFD5118E7FDFA0014418C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		789DF8A718E60D8200DE045D /* InfoPlist.strings */ = {
@@ -309,6 +408,14 @@
 				789DF8DE18E61D1C00DE045D /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		78CEFD4B18E7FDFA0014418C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78CEFD4C18E7FDFA0014418C /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -414,6 +521,46 @@
 			};
 			name = Release;
 		};
+		78CEFD5318E7FDFA0014418C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SToDo.app/SToDo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SomethingTODO Tests/SomethingTODO Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SomethingTODO Tests/SomethingTODO Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		78CEFD5418E7FDFA0014418C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SToDo.app/SToDo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SomethingTODO Tests/SomethingTODO Tests-Prefix.pch";
+				INFOPLIST_FILE = "SomethingTODO Tests/SomethingTODO Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -434,6 +581,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		78CEFD5518E7FDFA0014418C /* Build configuration list for PBXNativeTarget "SomethingTODO Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78CEFD5318E7FDFA0014418C /* Debug */,
+				78CEFD5418E7FDFA0014418C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
