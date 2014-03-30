@@ -236,8 +236,7 @@ static NSString *kSegueGoToEditReminder			= @"editReminder";
     
     [[[STDAppDelegate shareInstance] eventStore] fetchRemindersMatchingPredicate:predicate completion:^(NSArray *reminders) {
         self.reminderList = [[[reminders reverseObjectEnumerator] allObjects] mutableCopy];
-        [self.tableView reloadData];
-		[self.tableView setNeedsLayout];
+		[self.tableView reloadData];
     }];
 }
 

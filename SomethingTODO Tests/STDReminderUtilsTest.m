@@ -13,37 +13,48 @@
 
 @interface STDReminderUtilsTest : XCTestCase
 
-@property (nonatomic, strong) EKReminder *reminder;
-
 @end
 
 @implementation STDReminderUtilsTest
 
-- (void)testSaveNewReminder
+- (EKReminder *)createDummyReminder
 {
-	self.reminder = [EKReminder reminderWithEventStore:[STDAppDelegate shareInstance].eventStore];
-	[self.reminder setCalendar:[[STDAppDelegate shareInstance].eventStore defaultCalendarForNewReminders]];
+	EKReminder *reminder = [EKReminder reminderWithEventStore:[STDAppDelegate shareInstance].eventStore];
+	[reminder setCalendar:[[STDAppDelegate shareInstance].eventStore defaultCalendarForNewReminders]];
 	
 	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
 	NSCalendar *cal = [NSCalendar currentCalendar];
 	
-	[self.reminder setStartDateComponents:[cal components:unitFlags fromDate:[NSDate date]]];
-    [self.reminder setTitle:@"Test Reminder Title"];
-    [self.reminder setNotes:@"Test Description"];
-    [self.reminder setPriority:0];
+	[reminder setStartDateComponents:[cal components:unitFlags fromDate:[NSDate date]]];
+    [reminder setTitle:@"Test Reminder Title"];
+    [reminder setNotes:@"Test Description"];
+    [reminder setPriority:0];
 	
-	XCTAssertTrue([STDReminderUtils saveReminderToStore:self.reminder]);
+	return reminder;
 }
 
-- (void)testRemoveReminder
+- (void)testSaveNewReminder
 {
-    [self.reminder setTitle:@"Test Reminder Title Updated!"];
-	XCTAssertTrue([STDReminderUtils saveReminderToStore:self.reminder]);
+	XCTAssertTrue([STDReminderUtils saveReminderToStore:[self createDummyReminder]]);
 }
 
 - (void)testUpdateReminder
 {
-	XCTAssertTrue([STDReminderUtils removeReminder:self.reminder]);
+	EKReminder *reminder = [self createDummyReminder];
+	if ([STDReminderUtils saveReminderToStore:reminder])
+	{
+		reminder.title = @"Update test";
+		XCTAssertTrue([STDReminderUtils saveReminderToStore:reminder]);
+	}
+}
+
+- (void)testRemoveReminder
+{
+	EKReminder *reminder = [self createDummyReminder];
+	if ([STDReminderUtils saveReminderToStore:reminder])
+	{
+		XCTAssertTrue([STDReminderUtils removeReminder:reminder]);
+	}
 }
 
 @end
