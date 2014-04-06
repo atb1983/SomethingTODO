@@ -88,10 +88,9 @@
 
 - (void)configureView
 {
-	if (self.currentReminder.alarms.count > 0)
+	if (self.structuredLocation)
 	{
-		EKAlarm *alarm = [self.currentReminder.alarms lastObject];
-		[self createReminderAnnotation:alarm.structuredLocation.geoLocation.coordinate];
+		[self createReminderAnnotation:self.structuredLocation.geoLocation.coordinate];
 	}
 }
 
@@ -101,19 +100,24 @@
 	
 	MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
 	pointAnnotation.coordinate = point;
-	pointAnnotation.title = [self.currentReminder.title length] == 0 ? NSLocalizedString(@"map_reminder_title", nil) : self.currentReminder.title;
-	pointAnnotation.subtitle = self.currentReminder.notes;
+	pointAnnotation.title = [self.reminderTitle length] == 0 ? NSLocalizedString(@"map_reminder_title", nil) : self.reminderTitle;
+	pointAnnotation.subtitle = self.reminderDescription;
 	[self.mapView addAnnotation:pointAnnotation];
 }
 
 - (void)updateReminder:(CLLocationCoordinate2D)point
 {
-	EKStructuredLocation *location = [EKStructuredLocation locationWithTitle:@"Reminder Location"];
-	location.geoLocation = [[CLLocation alloc] initWithCoordinate:point altitude:0 horizontalAccuracy:0 verticalAccuracy:0 course:0 speed:0 timestamp:[NSDate date]];
+	if (!self.structuredLocation)
+	{
+		self.structuredLocation = [EKStructuredLocation locationWithTitle:@"Reminder Location"];
+	}
 	
-	EKAlarm *alarm = [[EKAlarm alloc] init];
-	alarm.structuredLocation = location;
-	self.currentReminder.alarms = @[alarm];
+	self.structuredLocation.geoLocation = [[CLLocation alloc] initWithCoordinate:point altitude:0 horizontalAccuracy:0 verticalAccuracy:0 course:0 speed:0 timestamp:[NSDate date]];
+	
+	if ([self.delegate respondsToSelector:@selector(mapViewController:positionUpdated:)])
+	{
+		[self.delegate mapViewController:self positionUpdated:self.structuredLocation];
+	}
 }
 
 - (void)zoomToUserLocation:(MKUserLocation *)userLocation
@@ -123,7 +127,7 @@
 	
     MKCoordinateRegion region;
     region.center = userLocation.location.coordinate;
-    region.span = MKCoordinateSpanMake(2.0, 2.0);	//Zoom distance
+    region.span = MKCoordinateSpanMake(2.0, 2.0);		//Zoom distance
     region = [self.mapView regionThatFits:region];
     [self.mapView setRegion:region animated:YES];
 }

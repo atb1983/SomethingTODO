@@ -16,11 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TgL-78-KTG">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TgL-78-KTG">
                                 <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="460" id="ofV-Aa-LN5"/>
+                                </constraints>
                             </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5BG-RI-pdw">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5BG-RI-pdw">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
@@ -35,6 +38,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="TgL-78-KTG" firstAttribute="top" secondItem="cvu-JP-fqv" secondAttribute="bottom" id="Jfr-x6-Kyl"/>
+                            <constraint firstItem="TgL-78-KTG" firstAttribute="bottom" secondItem="5BG-RI-pdw" secondAttribute="top" id="Pw9-lA-DnE"/>
+                            <constraint firstItem="TgL-78-KTG" firstAttribute="trailing" secondItem="5BG-RI-pdw" secondAttribute="trailing" id="bnP-Nb-oio"/>
+                            <constraint firstAttribute="trailing" secondItem="TgL-78-KTG" secondAttribute="trailing" id="l6V-9k-wh1"/>
+                            <constraint firstItem="TgL-78-KTG" firstAttribute="leading" secondItem="0PT-eN-jPM" secondAttribute="leading" id="lBk-38-hCd"/>
+                            <constraint firstItem="TgL-78-KTG" firstAttribute="leading" secondItem="5BG-RI-pdw" secondAttribute="leading" id="nca-ca-gN6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kSH-Da-XfU"/>
@@ -105,7 +113,7 @@
                                         </segments>
                                     </segmentedControl>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Priority:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrK-qe-ekv">
-                                        <rect key="frame" x="25" y="33" width="65" height="21"/>
+                                        <rect key="frame" x="25" y="34" width="65" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <nil key="highlightedColor"/>
@@ -126,6 +134,9 @@
                                         <state key="normal" image="calendar">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="changeDate:" destination="Kga-YH-SkF" eventType="touchUpInside" id="k64-Ml-bd3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmI-aM-cfd">
                                         <rect key="frame" x="258" y="182" width="41" height="32"/>
@@ -137,6 +148,13 @@
                                             <segue destination="VPW-3f-2Yv" kind="push" identifier="ReminderMapSegue" id="e9c-Kt-6jj"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alarm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97h-hb-bsJ">
+                                        <rect key="frame" x="25" y="188" width="158" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -144,6 +162,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Reminder Details" id="Snp-b6-Nok"/>
                     <connections>
+                        <outlet property="alarmLabel" destination="97h-hb-bsJ" id="Fpj-Nn-UAP"/>
                         <outlet property="descriptionLabel" destination="RJG-QH-gqg" id="HN2-0d-nxG"/>
                         <outlet property="descriptionTextView" destination="gPU-da-fYr" id="eIV-1k-sI5"/>
                         <outlet property="priorityLabel" destination="xrK-qe-ekv" id="NXr-1g-lgc"/>
@@ -189,23 +208,33 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePT-GE-8AT">
-                                            <rect key="frame" x="12" y="9" width="301" height="21"/>
+                                            <rect key="frame" x="12" y="9" width="246" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="01/01/2013" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTT-eZ-TT3">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="01/01/2013" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTT-eZ-TT3">
                                             <rect key="frame" x="12" y="34" width="301" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="Usp-SB-3Zc">
+                                            <rect key="frame" x="273" y="10" width="16" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="maps" translatesAutoresizingMaskIntoConstraints="NO" id="vfL-Uc-5VO">
+                                            <rect key="frame" x="297" y="10" width="16" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="calendarImageView" destination="Usp-SB-3Zc" id="jLh-Oi-GOf"/>
                                     <outlet property="dateLabel" destination="XTT-eZ-TT3" id="a0O-hv-lUY"/>
+                                    <outlet property="locationImageView" destination="vfL-Uc-5VO" id="igu-Dx-PRd"/>
                                     <outlet property="titleLabel" destination="ePT-GE-8AT" id="0Rl-ZA-R4o"/>
                                 </connections>
                             </tableViewCell>

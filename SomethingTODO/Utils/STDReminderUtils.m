@@ -8,9 +8,10 @@
 
 #import "STDReminderUtils.h"
 #import "STDAppDelegate.h"
+
 @implementation STDReminderUtils
 
-+ (NSString *)getTimestampForDate:(NSDateComponents*)dateComponents
++ (NSString *)getTimestampWithDateComponents:(NSDateComponents *)dateComponents
 {
 	NSCalendar *cal = [NSCalendar currentCalendar];
     [cal setTimeZone:[NSTimeZone localTimeZone]];
@@ -21,7 +22,11 @@
 		return @"";
 	}
 	
-	NSDate *reminderDate = [cal dateFromComponents:dateComponents];
+	return [self getTimestampWithDate:[cal dateFromComponents:dateComponents]];
+}
+
++ (NSString *)getTimestampWithDate:(NSDate *)reminderDate
+{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	
     NSString *timestamp;
@@ -71,7 +76,7 @@
 
 + (BOOL)saveReminderToStore:(EKReminder *)reminder
 {
-    BOOL result;
+    BOOL result = NO;
     
     NSError *error = nil;
     

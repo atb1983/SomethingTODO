@@ -9,10 +9,23 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+@class STDMapViewController;
+
+// Delegate
+@protocol STDMapViewControllerDelegate <NSObject>
+
+@optional
+- (void)mapViewController:(STDMapViewController *)mapViewController positionUpdated:(EKStructuredLocation *)location;
+@end
+
 @interface STDMapViewController : UIViewController
 
+@property (weak) id <STDMapViewControllerDelegate> delegate;
+
 // reminder to check
-@property (nonatomic, strong) EKReminder *currentReminder;
+@property (nonatomic, strong) NSString *reminderTitle;
+@property (nonatomic, strong) NSString *reminderDescription;
+@property (nonatomic, strong) EKStructuredLocation *structuredLocation;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *localizeMeButton;

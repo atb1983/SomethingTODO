@@ -123,10 +123,17 @@ static NSString *kSegueGoToEditReminder			= @"editReminder";
     cell.titleLabel.textColor = labelColor;
     
 	cell.dateLabel.textColor = labelColor;
-	cell.dateLabel.text = [STDReminderUtils getTimestampForDate:reminder.startDateComponents];
+	cell.dateLabel.text = [STDReminderUtils getTimestampWithDateComponents:reminder.startDateComponents];
 	
-	cell.descriptionLabel.text = reminder.notes;
 	cell.dateLabel.textColor = labelColor;
+	
+	EKAlarm *alarm = [reminder.alarms lastObject];
+	
+	if (alarm)
+	{
+		[cell.calendarImageView setHidden:alarm.absoluteDate ? NO : YES];
+		[cell.locationImageView setHidden:alarm.structuredLocation ? NO : YES];
+	}
 	
     // Gestures
     UISwipeGestureRecognizer *leftToRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
@@ -155,17 +162,11 @@ static NSString *kSegueGoToEditReminder			= @"editReminder";
 	[self.tableView endUpdates];
     
 	[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationFade];
-
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"listvc_new_reminder_added", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
-    [alert show];
 }
 
 - (void)editReminderViewController:(STDEditReminderViewController *)editReminderViewController didModifiedNeminder:(EKReminder *)reminder
 {
     [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationFade];
-    
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"listvc_reminder_updated", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
-    [alert show];
 }
 
 #pragma mark - Segue
@@ -235,8 +236,12 @@ static NSString *kSegueGoToEditReminder			= @"editReminder";
     NSPredicate *predicate = [[[STDAppDelegate shareInstance] eventStore] predicateForRemindersInCalendars:nil];
     
     [[[STDAppDelegate shareInstance] eventStore] fetchRemindersMatchingPredicate:predicate completion:^(NSArray *reminders) {
-        self.reminderList = [[[reminders reverseObjectEnumerator] allObjects] mutableCopy];
-		[self.tableView reloadData];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			self.reminderList = [[[reminders reverseObjectEnumerator] allObjects] mutableCopy];
+			[self.tableView reloadData];
+		});
+		
     }];
 }
 

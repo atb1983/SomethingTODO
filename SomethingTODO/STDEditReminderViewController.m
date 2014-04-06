@@ -10,15 +10,20 @@
 #import "STDAppDelegate.h"
 #import "STDReminderUtils.h"
 #import "STDMapViewController.h"
+#import "STDReminderUtils.h"
 
 #import "UITextField+ExtraPadding.h"
 #import "UIView+Border.h"
+#import <MGConferenceDatePicker.h>
+#import <MGConferenceDatePickerDelegate.h>
 
 #import <QuartzCore/QuartzCore.h>
 
 static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
 
-@interface STDEditReminderViewController () <UITextFieldDelegate, UITextViewDelegate>
+@interface STDEditReminderViewController () <UITextFieldDelegate, UITextViewDelegate, MGConferenceDatePickerDelegate, STDMapViewControllerDelegate>
+
+@property (strong, nonatomic) UIViewController *pickerViewController;
 
 @property (weak, nonatomic) IBOutlet UILabel            *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextField        *titleTextField;
@@ -27,6 +32,11 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
 @property (weak, nonatomic) IBOutlet UILabel            *priorityLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *prioritySergmentedControl;
 @property (weak, nonatomic) IBOutlet UIButton           *saveChangesButton;
+@property (weak, nonatomic) IBOutlet UILabel			*alarmLabel;
+
+@property (strong, nonatomic) EKStructuredLocation		*structuredLocation;
+@property (strong, nonatomic) NSDate					*alarmDate;
+@property (assign, nonatomic) BOOL						isNewReminder;
 
 @end
 
@@ -64,8 +74,6 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
     return NO;
 }
 
-#pragma mark - UITextFieldDelegate
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange) range replacementText:(NSString *)text
 {
     if ([text isEqualToString:@"\n"])
@@ -78,6 +86,23 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
     return YES;
 }
 
+#pragma mark - MGConferenceDatePickerDelegate
+
+- (void)conferenceDatePicker:(MGConferenceDatePicker *)datePicker saveDate:(NSDate *)date
+{
+	[self.pickerViewController dismissViewControllerAnimated:YES completion:^{
+		self.alarmDate = date;
+		self.alarmLabel.text = [self alarmTextWithDate:date];
+	}];
+}
+
+#pragma mark - STDMapViewControllerDelegate
+
+- (void)mapViewController:(STDMapViewController *)mapViewController positionUpdated:(EKStructuredLocation *)location;
+{
+	self.structuredLocation = location;
+}
+
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -85,9 +110,10 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
     if ([[segue identifier] isEqualToString:kSegueGoToReminderMap])
     {
         STDMapViewController *vc = (STDMapViewController *)[segue destinationViewController];
-		
-//        vc.delegate = self;
-        [vc setCurrentReminder:self.currentReminder];
+		[vc setDelegate:self];
+		[vc setReminderTitle:self.currentReminder.title];
+		[vc setReminderDescription:self.currentReminder.notes];
+        [vc setStructuredLocation:self.structuredLocation];
     }
 }
 
@@ -111,7 +137,29 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
 	}
 }
 
-#pragma mark - Helper
+#pragma mark - Actions
+
+- (IBAction)changeDate:(id)sender
+{
+	//New view controller
+	self.pickerViewController = [[UIViewController alloc] init];
+	
+    //Init the datePicker view and set self as delegate
+    MGConferenceDatePicker *datePicker = [[MGConferenceDatePicker alloc] initWithFrame:self.view.bounds];
+    [datePicker setDelegate:self];
+	
+    //OPTIONAL: Choose the background color
+    [datePicker setBackgroundColor:[UIColor whiteColor]];
+	
+    //Set the data picker as view of the new view controller
+    [self.pickerViewController setView:datePicker];
+	
+    //Present the view controller
+    [self presentViewController:self.pickerViewController animated:YES completion:nil];
+}
+
+
+#pragma mark - Helpers
 
 // Set the name of the view controoler, labels and place holders.
 - (void)applyLocalization
@@ -125,6 +173,7 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
     [self.prioritySergmentedControl setTitle:	NSLocalizedString(@"edit_priority_segment_normal", nil) forSegmentAtIndex:0];
 	[self.prioritySergmentedControl setTitle:	NSLocalizedString(@"edit_priority_segment_high", nil) forSegmentAtIndex:1];
     [self.saveChangesButton setTitle:			NSLocalizedString(@"edit_save", nil) forState:UIControlStateNormal];
+	self.alarmLabel.text =						NSLocalizedString(@"edit_alarm_no_set", nil);
 }
 
 // Set the style for the labels and text fields
@@ -132,11 +181,8 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
 {
 	// Colors
     UIColor *defaultBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
-    self.titleLabel.textColor = defaultBlue;
     self.titleTextField.textColor = defaultBlue;
-    self.descriptionLabel.textColor = defaultBlue;
     self.descriptionTextView.textColor = defaultBlue;
-    self.priorityLabel.textColor = defaultBlue;
     
     // Padding
     [self.titleTextField setLeftPadding:4.0f];
@@ -153,35 +199,41 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
     // Update the user interface for the reminder item.
     if (self.currentReminder)
     {
-        EKReminder *reminder = self.currentReminder;
-        
-		// only when the reminder is valid we fetch its data
-        if (reminder)
-        {
-            self.titleTextField.text = reminder.title;
-            self.descriptionTextView.text = reminder.notes;
-            [self.prioritySergmentedControl setSelectedSegmentIndex:reminder.priority];
-        }
+		self.isNewReminder = NO;
+		
+		self.titleTextField.text = self.currentReminder.title;
+		self.descriptionTextView.text = self.currentReminder.notes;
+		[self.prioritySergmentedControl setSelectedSegmentIndex:self.currentReminder.priority];
+		
+		EKAlarm *alarm = [self.currentReminder.alarms lastObject];
+		
+		if (alarm)
+		{
+			self.structuredLocation = [alarm structuredLocation];
+			self.alarmDate = [alarm absoluteDate];
+			
+			if (self.alarmDate)
+			{
+				self.alarmLabel.text = [self alarmTextWithDate:alarm.absoluteDate];
+			}
+			else
+			{
+				self.alarmLabel.text = NSLocalizedString(@"edit_alarm_no_set", nil);
+			}
+		}
     }
 	else
 	{
-		self.currentReminder = [[EKReminder alloc] init];
+		self.isNewReminder = YES;
+		
+		self.currentReminder = [EKReminder reminderWithEventStore:[STDAppDelegate shareInstance].eventStore];
+		[self.currentReminder setCalendar:[[STDAppDelegate shareInstance].eventStore defaultCalendarForNewReminders]];
 	}
 }
 
 // Save a new rmeinder or update it.
 - (void)saveReminderInformation
 {
-	BOOL isNewReminder = NO;
-    
-    if (!self.currentReminder)
-    {
-        self.currentReminder = [EKReminder reminderWithEventStore:[STDAppDelegate shareInstance].eventStore];
-        [self.currentReminder setCalendar:[[STDAppDelegate shareInstance].eventStore defaultCalendarForNewReminders]];
-        
-        isNewReminder = YES;
-    }
-    
 	// new information
 	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
 	NSCalendar *cal = [NSCalendar currentCalendar];
@@ -190,12 +242,35 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
     [self.currentReminder setTitle:self.titleTextField.text];
     [self.currentReminder setNotes:self.descriptionTextView.text];
     [self.currentReminder setPriority:self.prioritySergmentedControl.selectedSegmentIndex];
-    
+	
+	// Alarm
+	EKAlarm *alarm;
+	
+	if (self.currentReminder.alarms > 0)
+	{
+		alarm = [self.currentReminder.alarms lastObject];
+	}
+	else
+	{
+		alarm = [[EKAlarm alloc] init];
+		self.currentReminder.alarms = @[alarm];
+	}
+	
+	if (self.alarmDate)
+	{
+		[alarm setAbsoluteDate:self.alarmDate];
+	}
+	
+	if (self.structuredLocation)
+	{
+		[alarm setStructuredLocation:self.structuredLocation];
+	}
+	
 	// we try to save the reminder
     if ([STDReminderUtils saveReminderToStore:self.currentReminder])
     {
 		// saved and new
-        if (isNewReminder)
+        if (self.isNewReminder)
         {
 			// we trigger the delegate
             if ([self.delegate respondsToSelector:@selector(editReminderViewController:didSaveNewReminder:)])
@@ -214,6 +289,14 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
         
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+- (NSString *)alarmTextWithDate:(NSDate *)date
+{
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+	
+	return [dateFormatter stringFromDate:date];
 }
 
 @end

@@ -30,12 +30,13 @@
 "edit_save" = "Save changes";
 "edit_reminder_error" = "Your reminder hasn't not been saved. there is an unknown error.";
 "remove_reminder_error" = "It's not possible to remove that reminder, please try again.";
+"edit_alarm_no_set" = "No Alarm set";
 
 // Map Reminder
 "map_title_vc" = "Location";
 "map_reminder_title" = "Reminder";
 
 // Date Format
-"reminder_utils_just_now" = "Just Now";
-"reminder_utils_today_now" = "Today at %@";
-"reminder_utils_yesterday_now" = "Yesterday at %@";
+"reminder_utils_just_now" = "Created just Now";
+"reminder_utils_today_now" = "Created today at %@";
+"reminder_utils_yesterday_now" = "Created yesterday at %@";
