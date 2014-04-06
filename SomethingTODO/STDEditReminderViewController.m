@@ -111,8 +111,8 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
     {
         STDMapViewController *vc = (STDMapViewController *)[segue destinationViewController];
 		[vc setDelegate:self];
-		[vc setReminderTitle:self.currentReminder.title];
-		[vc setReminderDescription:self.currentReminder.notes];
+		[vc setReminderTitle:self.titleTextField.text];
+		[vc setReminderDescription:self.descriptionTextView.text];
         [vc setStructuredLocation:self.structuredLocation];
     }
 }
@@ -235,14 +235,15 @@ static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
 - (void)saveReminderInformation
 {
 	// new information
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+	
 	NSCalendar *cal = [NSCalendar currentCalendar];
 	
 	[self.currentReminder setStartDateComponents:[cal components:unitFlags fromDate:[NSDate date]]];
     [self.currentReminder setTitle:self.titleTextField.text];
     [self.currentReminder setNotes:self.descriptionTextView.text];
     [self.currentReminder setPriority:self.prioritySergmentedControl.selectedSegmentIndex];
-	
+		
 	// Alarm
 	EKAlarm *alarm;
 	

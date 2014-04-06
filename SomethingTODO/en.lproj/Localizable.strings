@@ -37,6 +37,6 @@
 "map_reminder_title" = "Reminder";
 
 // Date Format
-"reminder_utils_just_now" = "Created just Now";
-"reminder_utils_today_now" = "Created today at %@";
-"reminder_utils_yesterday_now" = "Created yesterday at %@";
+"reminder_utils_just_now" = "Just Now";
+"reminder_utils_today" = "Today at %@";
+"reminder_utils_yesterday" = "Yesterday at %@";

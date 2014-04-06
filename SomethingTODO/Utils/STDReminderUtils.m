@@ -44,13 +44,13 @@
 	else if(timeIntervalInHours < 24)
 	{
         [dateFormatter setDateFormat:@"HH:mm"];
-        timestamp = [NSString stringWithFormat:NSLocalizedString(@"reminder_utils_just_now", nil), [dateFormatter stringFromDate:reminderDate]];
+        timestamp = [NSString stringWithFormat:NSLocalizedString(@"reminder_utils_today", nil), [dateFormatter stringFromDate:reminderDate]];
     }
 	//less than 2 days
 	else if (timeIntervalInHours < 48)
 	{
         [dateFormatter setDateFormat:@"HH:mm"];
-        timestamp = [NSString stringWithFormat:NSLocalizedString(@"reminder_utils_yesterday_now",nil), [dateFormatter stringFromDate:reminderDate]];
+        timestamp = [NSString stringWithFormat:NSLocalizedString(@"reminder_utils_yesterday",nil), [dateFormatter stringFromDate:reminderDate]];
     }
 	//less than  a week
 	else if (timeIntervalInHours < 168)

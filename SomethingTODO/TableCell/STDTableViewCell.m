@@ -33,10 +33,12 @@
     _taskCompleted = taskCompleted;
     
     // Cell Style
-    static float alpha = 0.3f;
+	float alpha = taskCompleted ? 0.3f : 1.0f;
     
-    [self.dateLabel         setAlpha:taskCompleted ? alpha : 1.0f];
-    [self.titleLabel        setAlpha:taskCompleted ? alpha : 1.0f];
+    [self.dateLabel setAlpha:alpha];
+    [self.titleLabel setAlpha:alpha];
+	[self.calendarImageView setAlpha:alpha];
+	[self.locationImageView setAlpha:alpha];
 }
 
 @end
