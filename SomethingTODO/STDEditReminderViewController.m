@@ -9,11 +9,14 @@
 #import "STDEditReminderViewController.h"
 #import "STDAppDelegate.h"
 #import "STDReminderUtils.h"
+#import "STDMapViewController.h"
 
 #import "UITextField+ExtraPadding.h"
 #import "UIView+Border.h"
 
 #import <QuartzCore/QuartzCore.h>
+
+static NSString *kSegueGoToReminderMap	= @"ReminderMapSegue";
 
 @interface STDEditReminderViewController () <UITextFieldDelegate, UITextViewDelegate>
 
@@ -34,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+	
     // Update the view.
 	[self applyLocalization];
     [self applyStyle];
@@ -73,6 +76,19 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:kSegueGoToReminderMap])
+    {
+        STDMapViewController *vc = (STDMapViewController *)[segue destinationViewController];
+		
+//        vc.delegate = self;
+        [vc setCurrentReminder:self.currentReminder];
+    }
 }
 
 #pragma mark - IBActions
@@ -147,6 +163,10 @@
             [self.prioritySergmentedControl setSelectedSegmentIndex:reminder.priority];
         }
     }
+	else
+	{
+		self.currentReminder = [[EKReminder alloc] init];
+	}
 }
 
 // Save a new rmeinder or update it.

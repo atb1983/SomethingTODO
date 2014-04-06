@@ -31,6 +31,10 @@
 "edit_reminder_error" = "Your reminder hasn't not been saved. there is an unknown error.";
 "remove_reminder_error" = "It's not possible to remove that reminder, please try again.";
 
+// Map Reminder
+"map_title_vc" = "Location";
+"map_reminder_title" = "Reminder";
+
 // Date Format
 "reminder_utils_just_now" = "Just Now";
 "reminder_utils_today_now" = "Today at %@";

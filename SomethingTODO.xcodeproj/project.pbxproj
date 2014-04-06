@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2F2121312FA74AD98B4304EB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1DFFE06A69E4FF0BE7231A0 /* libPods.a */; };
+		783CB46C18F12E1E00567B0A /* STDMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 783CB46B18F12E1E00567B0A /* STDMapViewController.m */; };
+		783CB46E18F12E8500567B0A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 783CB46D18F12E8500567B0A /* MapKit.framework */; };
 		789DF89F18E60D8200DE045D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF89E18E60D8200DE045D /* Foundation.framework */; };
 		789DF8A118E60D8200DE045D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF8A018E60D8200DE045D /* CoreGraphics.framework */; };
 		789DF8A318E60D8200DE045D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF8A218E60D8200DE045D /* UIKit.framework */; };
@@ -43,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		783CB46A18F12E1E00567B0A /* STDMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDMapViewController.h; path = Map/STDMapViewController.h; sourceTree = "<group>"; };
+		783CB46B18F12E1E00567B0A /* STDMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDMapViewController.m; path = Map/STDMapViewController.m; sourceTree = "<group>"; };
+		783CB46D18F12E8500567B0A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		789DF89B18E60D8200DE045D /* SToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789DF89E18E60D8200DE045D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		789DF8A018E60D8200DE045D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -86,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				783CB46E18F12E8500567B0A /* MapKit.framework in Frameworks */,
 				789DF8D418E6145E00DE045D /* EventKit.framework in Frameworks */,
 				789DF8A118E60D8200DE045D /* CoreGraphics.framework in Frameworks */,
 				789DF8A318E60D8200DE045D /* UIKit.framework in Frameworks */,
@@ -107,6 +113,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		783CB46918F12DF900567B0A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				783CB46A18F12E1E00567B0A /* STDMapViewController.h */,
+				783CB46B18F12E1E00567B0A /* STDMapViewController.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
 		789DF89218E60D8200DE045D = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +145,7 @@
 		789DF89D18E60D8200DE045D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				783CB46D18F12E8500567B0A /* MapKit.framework */,
 				789DF8D318E6145E00DE045D /* EventKit.framework */,
 				789DF89E18E60D8200DE045D /* Foundation.framework */,
 				789DF8A018E60D8200DE045D /* CoreGraphics.framework */,
@@ -143,6 +159,7 @@
 		789DF8A418E60D8200DE045D /* SomethingTODO */ = {
 			isa = PBXGroup;
 			children = (
+				783CB46918F12DF900567B0A /* Map */,
 				789DF93818E70F2600DE045D /* Categories */,
 				789DF93418E6E3F900DE045D /* Utils */,
 				789DF8D518E618E600DE045D /* TableCell */,
@@ -358,6 +375,7 @@
 				789DF93318E6D62500DE045D /* STDEditReminderViewController.m in Sources */,
 				789DF93718E6E40F00DE045D /* STDReminderUtils.m in Sources */,
 				789DF93B18E70F5200DE045D /* UITextField+ExtraPadding.m in Sources */,
+				783CB46C18F12E1E00567B0A /* STDMapViewController.m in Sources */,
 				789DF8B518E60D8200DE045D /* STDTableViewController.m in Sources */,
 				789DF92C18E6A20500DE045D /* STDTableViewCellOverlay.m in Sources */,
 				789DF8AF18E60D8200DE045D /* STDAppDelegate.m in Sources */,
@@ -589,6 +607,7 @@
 				78CEFD5418E7FDFA0014418C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
