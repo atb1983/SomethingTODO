@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84B6A2FAF05A420EA439BFAA"
-               BuildableName = "libPods-MBProgressHUD.a"
-               BlueprintName = "Pods-MBProgressHUD"
+               BlueprintIdentifier = "7184A9EA45264D2A8B099909"
+               BuildableName = "libPods-MGConferenceDatePicker.a"
+               BlueprintName = "Pods-MGConferenceDatePicker"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-MBProgressHUD.xcscheme</key>
+		<key>Pods-MGConferenceDatePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>222F277C89234B2CB769A821</key>
+		<key>3A0F9E5A87954917BA57E372</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>84B6A2FAF05A420EA439BFAA</key>
+		<key>7184A9EA45264D2A8B099909</key>
 		<dict>
 			<key>primary</key>
 			<true/>
