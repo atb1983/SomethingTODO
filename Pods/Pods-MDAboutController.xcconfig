@@ -1,0 +1,1 @@
+PODS_MDABOUTCONTROLLER_OTHER_LDFLAGS = -framework MessageUI -framework UIKit

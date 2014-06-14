@@ -8,14 +8,14 @@
 
 // Common
 "common_alertview_title" = "Reminder";
-"common_ok" = "Ok";
+"common_ok" = "OK";
 
 // List Reminders VC
 "listvc_title_vc" = "Your ToDo List";
 "listvc_new_reminder_added" = "New reminder added to your list.";
 "listvc_reminder_updated" = "Your reminder is updated.";
 "listvc_no_access" = "For using this app you must give access to your reminders. please check your settings";
-"listvc_no_reminders" = "No reminders found";
+"listvc_no_reminders" = "Tap here for creating your first reminder";
 "listvc_header" = "Incompleted Tasks (%ld)";
 
 // Edit Reminder VC
@@ -40,3 +40,28 @@
 "reminder_utils_just_now" = "Just Now";
 "reminder_utils_today" = "Today at %@";
 "reminder_utils_yesterday" = "Yesterday at %@";
+
+// Settings
+"settings_title_vc" = "Something ToDo";
+"settings_version" = "Version";
+"settings_support_cell" = "Send Feedback";
+"settings_share_cell" = "Tell a friend about us";
+"settings_review_cell" = "Review";
+"settings_about_cell" = "About";
+"settings_support_header" = "Support";
+
+"support_mail_subject" = "Someting ToDo Support";
+"support_mail_body" = "Please, write here your feedback";
+"tell_a_friend_email_subject" = "Try Something ToDo for iOS, it is free !";
+"tell_a_friend_email_body" = "Try Something ToDo for iOS, it is free !, the simplest way to create your reminders";
+"share_facebook_title" = "Try Something ToDo for iOS, it is free !, the simplest way to create your reminders";
+"share_twitter_title" = "Try Something ToDo for iOS, it is free !, the simplest way to create your reminders";
+
+"settings_alert_message_no_email_account" = "You don't have any email account set. try to set a your account in the Settings option of your iphone";
+"settings_alert_message_no_facebook_account" = "You don't have any facebook account set. try to set a your account in the Settings option of your iphone";
+"settings_alert_message_no_twitter_account" = "You don't have any twitter account set. try to set a your account in the Settings option of your iphone";
+
+// About
+"about_about_me" = "About Me";
+"about_licence" = "Thanks also to: %@ %@";
+"about_message" = "Make your reminder easier";

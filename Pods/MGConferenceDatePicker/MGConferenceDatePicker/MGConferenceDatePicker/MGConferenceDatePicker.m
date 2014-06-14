@@ -227,9 +227,7 @@ const float LBL_BORDER_OFFSET = 8.0;
     _arrMinutes = [NSArray arrayWithArray:arrMinutes];
     
     //Set the acutal date
-	NSDate *currentDate = [NSDate date];
-	NSDate *datePlusOneHour = [currentDate dateByAddingTimeInterval:60 * 60];
-    _selectedDate = datePlusOneHour;
+    _selectedDate = [NSDate date];
 }
 
 
@@ -456,13 +454,9 @@ const float LBL_BORDER_OFFSET = 8.0;
     //Get the string
     NSString *strTime;
     if([time isEqualToString:NOW])
-	{
-        strTime = [self stringFromDate:self.selectedDate withFormat:@"hh:mm a"];
-	}
+        strTime = [self stringFromDate:[NSDate date] withFormat:@"hh:mm a"];
     else
-	{
         strTime = (NSString *)time;
-	}
     
     //Split
     NSArray *comp = [strTime componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" :"]];

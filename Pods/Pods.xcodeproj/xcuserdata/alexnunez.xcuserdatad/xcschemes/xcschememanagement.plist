@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-PLCrashReporter.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3A0F9E5A87954917BA57E372</key>
+		<key>070774EC8A574F7BB1C744A0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7184A9EA45264D2A8B099909</key>
+		<key>863854220203451687A33D44</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B55C1996019742E29E24388B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

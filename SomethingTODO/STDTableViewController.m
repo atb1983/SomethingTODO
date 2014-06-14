@@ -14,7 +14,10 @@
 
 static NSString *kTableViewCellIdentifier		= @"STDTableViewCell";
 static NSString *kPlaceHolderCellIdentifier		= @"Cell";
+
+// Segues
 static NSString *kSegueGoToEditReminder			= @"editReminder";
+static NSString *kSegueGoToSettings				= @"settings";
 
 @interface STDTableViewController () <UITableViewDelegate , STDEditReminderViewControllerDelegate>
 
@@ -29,6 +32,8 @@ static NSString *kSegueGoToEditReminder			= @"editReminder";
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"listvc_title_vc", nil);
+	
+	[self addLeftButton];
 	
     [self requestAccess];
 }
@@ -57,6 +62,7 @@ static NSString *kSegueGoToEditReminder			= @"editReminder";
 		if (cell == nil)
 		{
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPlaceHolderCellIdentifier];
+			cell.textLabel.font = [UIFont systemFontOfSize:13.0f];
 		}
 		
 		cell.textLabel.text = NSLocalizedString(@"listvc_no_reminders", nil);
@@ -169,12 +175,19 @@ static NSString *kSegueGoToEditReminder			= @"editReminder";
     [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationFade];
 }
 
-#pragma mark - Segue
+#pragma mark - UIActions
 
 - (void)addNewReminder:(UIEvent *)event
 {
     [self performSegueWithIdentifier:kSegueGoToEditReminder sender:nil];
 }
+
+- (void)goToSettings:(UIButton *)event
+{
+	[self performSegueWithIdentifier:kSegueGoToSettings sender:nil];
+}
+
+#pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -184,6 +197,10 @@ static NSString *kSegueGoToEditReminder			= @"editReminder";
         vc.delegate = self;
         [vc setCurrentReminder:sender];
     }
+	else if ([[segue identifier] isEqualToString:kSegueGoToSettings])
+	{
+		// Nothing to do right now
+	}
 }
 
 #pragma mark - Helpers
@@ -221,6 +238,17 @@ static NSString *kSegueGoToEditReminder			= @"editReminder";
 		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"common_alertview_title", nil) message:NSLocalizedString(@"listvc_no_access", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
         [alert show];
     }
+}
+
+- (void)addLeftButton
+{
+	// Left button for about
+	UIButton *btnLogo = [[UIButton alloc] init];
+	btnLogo.frame = CGRectMake(0,0,25,25);
+	[btnLogo setBackgroundImage:[UIImage imageNamed: @"Logo"] forState:UIControlStateNormal];
+	[btnLogo addTarget:self action:@selector(goToSettings:) forControlEvents:UIControlEventTouchUpInside];
+	
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btnLogo];
 }
 
 - (void)addRigthButton

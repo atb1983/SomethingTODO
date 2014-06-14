@@ -10,6 +10,10 @@
 		2F2121312FA74AD98B4304EB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1DFFE06A69E4FF0BE7231A0 /* libPods.a */; };
 		783CB46C18F12E1E00567B0A /* STDMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 783CB46B18F12E1E00567B0A /* STDMapViewController.m */; };
 		783CB46E18F12E8500567B0A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 783CB46D18F12E8500567B0A /* MapKit.framework */; };
+		786FDD3F194C135F0017E8FE /* STDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786FDD3E194C135F0017E8FE /* STDSettingsViewController.m */; };
+		786FDD41194C13C40017E8FE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 786FDD40194C13C40017E8FE /* MessageUI.framework */; };
+		786FDD43194C13CB0017E8FE /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 786FDD42194C13CB0017E8FE /* Social.framework */; };
+		786FDD46194C15900017E8FE /* STDConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 786FDD45194C15900017E8FE /* STDConst.m */; };
 		789DF89F18E60D8200DE045D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF89E18E60D8200DE045D /* Foundation.framework */; };
 		789DF8A118E60D8200DE045D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF8A018E60D8200DE045D /* CoreGraphics.framework */; };
 		789DF8A318E60D8200DE045D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789DF8A218E60D8200DE045D /* UIKit.framework */; };
@@ -48,6 +52,12 @@
 		783CB46A18F12E1E00567B0A /* STDMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDMapViewController.h; path = Map/STDMapViewController.h; sourceTree = "<group>"; };
 		783CB46B18F12E1E00567B0A /* STDMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDMapViewController.m; path = Map/STDMapViewController.m; sourceTree = "<group>"; };
 		783CB46D18F12E8500567B0A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		786FDD3D194C135F0017E8FE /* STDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDSettingsViewController.h; sourceTree = "<group>"; };
+		786FDD3E194C135F0017E8FE /* STDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDSettingsViewController.m; sourceTree = "<group>"; };
+		786FDD40194C13C40017E8FE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		786FDD42194C13CB0017E8FE /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		786FDD44194C15900017E8FE /* STDConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDConst.h; sourceTree = "<group>"; };
+		786FDD45194C15900017E8FE /* STDConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDConst.m; sourceTree = "<group>"; };
 		789DF89B18E60D8200DE045D /* SToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789DF89E18E60D8200DE045D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		789DF8A018E60D8200DE045D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,6 +101,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				786FDD43194C13CB0017E8FE /* Social.framework in Frameworks */,
+				786FDD41194C13C40017E8FE /* MessageUI.framework in Frameworks */,
 				783CB46E18F12E8500567B0A /* MapKit.framework in Frameworks */,
 				789DF8D418E6145E00DE045D /* EventKit.framework in Frameworks */,
 				789DF8A118E60D8200DE045D /* CoreGraphics.framework in Frameworks */,
@@ -145,6 +157,8 @@
 		789DF89D18E60D8200DE045D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				786FDD42194C13CB0017E8FE /* Social.framework */,
+				786FDD40194C13C40017E8FE /* MessageUI.framework */,
 				783CB46D18F12E8500567B0A /* MapKit.framework */,
 				789DF8D318E6145E00DE045D /* EventKit.framework */,
 				789DF89E18E60D8200DE045D /* Foundation.framework */,
@@ -170,6 +184,8 @@
 				789DF8B418E60D8200DE045D /* STDTableViewController.m */,
 				789DF93118E6D62500DE045D /* STDEditReminderViewController.h */,
 				789DF93218E6D62500DE045D /* STDEditReminderViewController.m */,
+				786FDD3D194C135F0017E8FE /* STDSettingsViewController.h */,
+				786FDD3E194C135F0017E8FE /* STDSettingsViewController.m */,
 				789DF8B618E60D8200DE045D /* Images.xcassets */,
 				789DF8A518E60D8200DE045D /* Supporting Files */,
 			);
@@ -204,6 +220,8 @@
 			children = (
 				789DF93518E6E40F00DE045D /* STDReminderUtils.h */,
 				789DF93618E6E40F00DE045D /* STDReminderUtils.m */,
+				786FDD44194C15900017E8FE /* STDConst.h */,
+				786FDD45194C15900017E8FE /* STDConst.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -288,6 +306,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Alex Franco";
 				TargetAttributes = {
+					789DF89A18E60D8200DE045D = {
+						DevelopmentTeam = R9Z3HD7PQ4;
+					};
 					78CEFD4318E7FDF90014418C = {
 						TestTargetID = 789DF89A18E60D8200DE045D;
 					};
@@ -375,8 +396,10 @@
 				789DF93318E6D62500DE045D /* STDEditReminderViewController.m in Sources */,
 				789DF93718E6E40F00DE045D /* STDReminderUtils.m in Sources */,
 				789DF93B18E70F5200DE045D /* UITextField+ExtraPadding.m in Sources */,
+				786FDD46194C15900017E8FE /* STDConst.m in Sources */,
 				783CB46C18F12E1E00567B0A /* STDMapViewController.m in Sources */,
 				789DF8B518E60D8200DE045D /* STDTableViewController.m in Sources */,
+				786FDD3F194C135F0017E8FE /* STDSettingsViewController.m in Sources */,
 				789DF92C18E6A20500DE045D /* STDTableViewCellOverlay.m in Sources */,
 				789DF8AF18E60D8200DE045D /* STDAppDelegate.m in Sources */,
 				789DF93E18E7105A00DE045D /* UIView+Border.m in Sources */,
@@ -515,11 +538,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
 				INFOPLIST_FILE = "SomethingTODO/SomethingTODO-Info.plist";
 				PRODUCT_NAME = SToDo;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "52F6BF9A-C8D9-40B1-9977-91E152985057";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -530,11 +554,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
 				INFOPLIST_FILE = "SomethingTODO/SomethingTODO-Info.plist";
 				PRODUCT_NAME = SToDo;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "BBCB1DA4-DCEB-4E59-8117-F5F69F9CB24E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

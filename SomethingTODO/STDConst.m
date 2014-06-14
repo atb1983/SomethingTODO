@@ -8,6 +8,5 @@
 
 #import "STDConst.h"
 
-@implementation STDConst
-
-@end
+NSString *const kSomethingTodoSpportEmailAddress = @"somethingtodo.ios@gmail.com";
+NSString *const kSomethingTodoAppStore = @"https://itunes.apple.com/us/app/something-todo/id889550012?ls=1&mt=8";

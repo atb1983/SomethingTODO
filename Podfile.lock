@@ -1,10 +1,13 @@
 PODS:
   - MGConferenceDatePicker (0.0.1)
+  - PLCrashReporter (1.2-rc5)
 
 DEPENDENCIES:
   - MGConferenceDatePicker (~> 0.0)
+  - PLCrashReporter (~> 1.2-rc5)
 
 SPEC CHECKSUMS:
-  MGConferenceDatePicker: fe48d88b6568ac90ebff425be800cf92f824efa7
+  MGConferenceDatePicker: 7141ab63ffd52fbfdbd04eec177c91dbcde26318
+  PLCrashReporter: 8d0e17c3bd9c3cbbc8cc0d959263ebad2a6dfad7
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.33.1

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STDSettingsViewController : UIViewController
+@interface STDSettingsViewController : UITableViewController
 
 @end

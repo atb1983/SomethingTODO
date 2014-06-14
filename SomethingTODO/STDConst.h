@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 Alex Franco. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#pragma mark - App Store
 
-@interface STDConst : NSObject
-
-@end
+extern NSString *const kSomethingTodoSpportEmailAddress;
+extern NSString *const kSomethingTodoAppStore;

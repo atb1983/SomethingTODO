@@ -2,3 +2,4 @@ platform :ios, '7.0'
 inhibit_all_warnings!
 
 pod 'MGConferenceDatePicker', '~> 0.0'
+pod 'PLCrashReporter', '~> 1.2-rc5'

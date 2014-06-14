@@ -1,5 +1,5 @@
 #include "Pods-MGConferenceDatePicker.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/MGConferenceDatePicker" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/MGConferenceDatePicker"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/MGConferenceDatePicker" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/MGConferenceDatePicker" "${PODS_ROOT}/Headers/PLCrashReporter"
 OTHER_LDFLAGS = -ObjC ${PODS_MGCONFERENCEDATEPICKER_OTHER_LDFLAGS}
 PODS_ROOT = ${SRCROOT}
