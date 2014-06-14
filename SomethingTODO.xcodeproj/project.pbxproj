@@ -125,13 +125,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		783CB46918F12DF900567B0A /* Map */ = {
+		783CB46918F12DF900567B0A /* Maps */ = {
 			isa = PBXGroup;
 			children = (
 				783CB46A18F12E1E00567B0A /* STDMapViewController.h */,
 				783CB46B18F12E1E00567B0A /* STDMapViewController.m */,
 			);
-			name = Map;
+			name = Maps;
 			sourceTree = "<group>";
 		};
 		789DF89218E60D8200DE045D = {
@@ -173,7 +173,7 @@
 		789DF8A418E60D8200DE045D /* SomethingTODO */ = {
 			isa = PBXGroup;
 			children = (
-				783CB46918F12DF900567B0A /* Map */,
+				783CB46918F12DF900567B0A /* Maps */,
 				789DF93818E70F2600DE045D /* Categories */,
 				789DF93418E6E3F900DE045D /* Utils */,
 				789DF8D518E618E600DE045D /* TableCell */,
