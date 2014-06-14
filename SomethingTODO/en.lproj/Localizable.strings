@@ -7,34 +7,40 @@
 */
 
 // Common
-"common_alertview_title" = "Reminder";
+"common_alertview_title" = "Task";
 "common_ok" = "OK";
+"common_cancel" = "Cancel";
 
 // List Reminders VC
 "listvc_title_vc" = "Your ToDo List";
-"listvc_new_reminder_added" = "New reminder added to your list.";
-"listvc_reminder_updated" = "Your reminder is updated.";
-"listvc_no_access" = "For using this app you must give access to your reminders. please check your settings";
-"listvc_no_reminders" = "Tap here for creating your first reminder";
+"listvc_new_reminder_added" = "New task added to your list.";
+"listvc_reminder_updated" = "Your task is updated.";
+"listvc_no_access" = "For using this app you must give access to your tasks. please check your settings";
+"listvc_no_reminders" = "Tap here for creating your first task";
 "listvc_header" = "Incompleted Tasks (%ld)";
+"listvc_points" = "%@ Point(s)";
+"listvc_new_title_alertview" = "New list title";
+"listvc_new_title_message" = "Please enter your new title for your list:";
+
+"points_help" = "Earn points everytime you complete a task. You have already %@ Point(s)";
 
 // Edit Reminder VC
-"edit_title_vc" = "Reminder Details";
+"edit_title_vc" = "Task Details";
 "edit_title_label" = "Title";
 "edit_title_textfield_placeholder" = "Write your title";
-"edit_title_textfield_empty" = "The reminder must contain a title";
+"edit_title_textfield_empty" = "The task must contain a title";
 "edit_description_label" = "Description:";
 "edit_priority_label" = "Priority:";
 "edit_priority_segment_normal" = "Normal";
 "edit_priority_segment_high" = "High";
 "edit_save" = "Save changes";
-"edit_reminder_error" = "Your reminder hasn't not been saved. there is an unknown error.";
-"remove_reminder_error" = "It's not possible to remove that reminder, please try again.";
+"edit_reminder_error" = "Your task hasn't not been saved. there is an unknown error.";
+"remove_reminder_error" = "It's not possible to remove that task, please try again.";
 "edit_alarm_no_set" = "No Alarm set";
 
 // Map Reminder
 "map_title_vc" = "Location";
-"map_reminder_title" = "Reminder";
+"map_reminder_title" = "Task";
 
 // Date Format
 "reminder_utils_just_now" = "Just Now";
@@ -53,9 +59,9 @@
 "support_mail_subject" = "Someting ToDo Support";
 "support_mail_body" = "Please, write here your feedback";
 "tell_a_friend_email_subject" = "Try Something ToDo for iOS, it is free !";
-"tell_a_friend_email_body" = "Try Something ToDo for iOS, it is free !, the simplest way to create your reminders";
-"share_facebook_title" = "Try Something ToDo for iOS, it is free !, the simplest way to create your reminders";
-"share_twitter_title" = "Try Something ToDo for iOS, it is free !, the simplest way to create your reminders";
+"tell_a_friend_email_body" = "Try Something ToDo for iOS, it is free !, the simplest way to create your tasks";
+"share_facebook_title" = "Try Something ToDo for iOS, it is free !, the simplest way to create your tasks";
+"share_twitter_title" = "Try Something ToDo for iOS, it is free !, the simplest way to create your tasks";
 
 "settings_alert_message_no_email_account" = "You don't have any email account set. try to set a your account in the Settings option of your iphone";
 "settings_alert_message_no_facebook_account" = "You don't have any facebook account set. try to set a your account in the Settings option of your iphone";
@@ -64,4 +70,4 @@
 // About
 "about_about_me" = "About Me";
 "about_licence" = "Thanks also to: %@ %@";
-"about_message" = "Make your reminder easier";
+"about_message" = "Make your tasks easier";

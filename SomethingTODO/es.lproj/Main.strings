@@ -1,0 +1,69 @@
+
+/* Class = "IBUILabel"; text = "Review"; ObjectID = "11Z-UY-mZO"; */
+"11Z-UY-mZO.text" = "Review";
+
+/* Class = "IBUIButton"; normalTitle = "Save changes"; ObjectID = "1Ev-Qs-gms"; */
+"1Ev-Qs-gms.normalTitle" = "Save changes";
+
+/* Class = "IBUILabel"; text = "About..."; ObjectID = "7dF-Ot-Dit"; */
+"7dF-Ot-Dit.text" = "About...";
+
+/* Class = "IBUITextField"; placeholder = "Write a title"; ObjectID = "8BH-mE-ce8"; */
+"8BH-mE-ce8.placeholder" = "Write a title";
+
+/* Class = "IBUILabel"; text = "Alarm"; ObjectID = "97h-hb-bsJ"; */
+"97h-hb-bsJ.text" = "Alarm";
+
+/* Class = "IBUILabel"; text = "Title:"; ObjectID = "EU9-3z-ApI"; */
+"EU9-3z-ApI.text" = "Title:";
+
+/* Class = "IBUITableViewSection"; footerTitle = "Version 1.0"; ObjectID = "GbL-Q5-zmt"; */
+"GbL-Q5-zmt.footerTitle" = "Version 1.0";
+
+/* Class = "IBUIViewController"; title = "Reminder Details"; ObjectID = "Kga-YH-SkF"; */
+"Kga-YH-SkF.title" = "Reminder Details";
+
+/* Class = "IBUILabel"; text = "Description:"; ObjectID = "RJG-QH-gqg"; */
+"RJG-QH-gqg.text" = "Description:";
+
+/* Class = "IBUINavigationItem"; title = "Reminder Details"; ObjectID = "Snp-b6-Nok"; */
+"Snp-b6-Nok.title" = "Reminder Details";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Support"; ObjectID = "Tji-5x-WcP"; */
+"Tji-5x-WcP.headerTitle" = "Support";
+
+/* Class = "IBUIViewController"; title = "Location"; ObjectID = "VPW-3f-2Yv"; */
+"VPW-3f-2Yv.title" = "Location";
+
+/* Class = "IBUILabel"; text = "01/01/2013"; ObjectID = "XTT-eZ-TT3"; */
+"XTT-eZ-TT3.text" = "01/01/2013";
+
+/* Class = "IBUISegmentedControl"; XjV-ti-gQb.segmentTitles[0] = "Normal"; ObjectID = "XjV-ti-gQb"; */
+"XjV-ti-gQb.segmentTitles[0]" = "Normal";
+
+/* Class = "IBUISegmentedControl"; XjV-ti-gQb.segmentTitles[1] = "High"; ObjectID = "XjV-ti-gQb"; */
+"XjV-ti-gQb.segmentTitles[1]" = "High";
+
+/* Class = "IBUINavigationItem"; title = "Your TODO List"; ObjectID = "YLL-X3-Wmk"; */
+"YLL-X3-Wmk.title" = "Your TODO List";
+
+/* Class = "IBUILabel"; text = "Send Feedback"; ObjectID = "aZm-TQ-c48"; */
+"aZm-TQ-c48.text" = "Send Feedback";
+
+/* Class = "IBUITableViewController"; title = "TODO List"; ObjectID = "cLm-cv-V9g"; */
+"cLm-cv-V9g.title" = "TODO List";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "ePT-GE-8AT"; */
+"ePT-GE-8AT.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Tell a friend about us"; ObjectID = "ggl-2Y-aZk"; */
+"ggl-2Y-aZk.text" = "Tell a friend about us";
+
+/* Class = "IBUITableViewController"; title = "About"; ObjectID = "hiI-Vg-jJM"; */
+"hiI-Vg-jJM.title" = "About";
+
+/* Class = "IBUILabel"; text = "Priority:"; ObjectID = "xrK-qe-ekv"; */
+"xrK-qe-ekv.text" = "Priority:";
+
+/* Class = "IBUIBarButtonItem"; title = "Localize me"; ObjectID = "yKk-36-MOF"; */
+"yKk-36-MOF.title" = "Localize me";

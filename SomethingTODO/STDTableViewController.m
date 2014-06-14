@@ -14,14 +14,22 @@
 
 static NSString *kTableViewCellIdentifier		= @"STDTableViewCell";
 static NSString *kPlaceHolderCellIdentifier		= @"Cell";
+static NSString *kKeyStorePoints				= @"MyPoints";
+static NSString *kKeyStoreListTitle				= @"MyListTitle";
+static NSInteger kShareAlertView					= 100;
 
 // Segues
 static NSString *kSegueGoToEditReminder			= @"editReminder";
 static NSString *kSegueGoToSettings				= @"settings";
 
-@interface STDTableViewController () <UITableViewDelegate , STDEditReminderViewControllerDelegate>
+@interface STDTableViewController () <UITableViewDelegate , STDEditReminderViewControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *reminderList;
+@property (nonatomic, strong) UIToolbar *toolbar;
+@property (nonatomic, strong) UIButton *pointsButton;
+@property (nonatomic, strong) NSNumber *points;
+@property (nonatomic, strong) NSUbiquitousKeyValueStore *keyStore;
+@property (nonatomic, strong) UITapGestureRecognizer* tapRecon;
 
 @end
 
@@ -31,11 +39,57 @@ static NSString *kSegueGoToSettings				= @"settings";
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"listvc_title_vc", nil);
-	
+	[self addToolbar];
 	[self addLeftButton];
-	
     [self requestAccess];
+	
+	// KeyStore
+	self.keyStore = [[NSUbiquitousKeyValueStore alloc] init];
+	self.points = [self.keyStore objectForKey:kKeyStorePoints];
+	
+	if (self.points != nil)
+	{
+		[self.pointsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"listvc_points", nil), self.points] forState:UIControlStateNormal];
+	}
+	else
+	{
+		self.points = 0;
+	}
+	
+	
+	// Navigation Bar
+	NSString *newTitle = [self.keyStore objectForKey:kKeyStoreListTitle];
+	self.title = newTitle == nil ? NSLocalizedString(@"listvc_title_vc", nil) : newTitle;
+
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector: @selector(ubiquitousKeyValueStoreDidChange:)
+												 name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification
+											   object:self.keyStore];
+
+	// Navigation bar clickable
+	self.tapRecon = [[UITapGestureRecognizer alloc]
+										initWithTarget:self action:@selector(changeTitle:)];
+    self.tapRecon.numberOfTapsRequired = 1;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	[self.navigationController setToolbarHidden:NO animated:YES];
+	
+	[self.navigationController.navigationBar addGestureRecognizer:self.tapRecon];
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	[self.navigationController setToolbarHidden:YES animated:YES];
+	
+	[self.navigationController.navigationBar removeGestureRecognizer:self.tapRecon];
+
 }
 
 #pragma mark - UITableViewDelegate
@@ -83,6 +137,10 @@ static NSString *kSegueGoToSettings				= @"settings";
 	{
 		[self performSegueWithIdentifier:kSegueGoToEditReminder sender:[self.reminderList objectAtIndex:indexPath.row]];
 	}
+	else
+	{
+		[self addNewReminder:nil];
+	}
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,6 +168,9 @@ static NSString *kSegueGoToSettings				= @"settings";
 			[self.tableView endUpdates];
 			
 			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationFade];
+			
+			self.points = [NSNumber numberWithInt:[self.points intValue] + 1];
+			[self savePoints];
 		}
 	}
 }
@@ -139,6 +200,11 @@ static NSString *kSegueGoToSettings				= @"settings";
 	{
 		[cell.calendarImageView setHidden:alarm.absoluteDate ? NO : YES];
 		[cell.locationImageView setHidden:alarm.structuredLocation ? NO : YES];
+	}
+	else
+	{
+		[cell.calendarImageView setHidden:YES];
+		[cell.locationImageView setHidden:YES];
 	}
 	
     // Gestures
@@ -177,14 +243,53 @@ static NSString *kSegueGoToSettings				= @"settings";
 
 #pragma mark - UIActions
 
-- (void)addNewReminder:(UIEvent *)event
+- (void)addNewReminder:(UIButton *)control
 {
     [self performSegueWithIdentifier:kSegueGoToEditReminder sender:nil];
 }
 
-- (void)goToSettings:(UIButton *)event
+- (void)goToSettings:(UIButton *)control
 {
 	[self performSegueWithIdentifier:kSegueGoToSettings sender:nil];
+}
+
+- (void)showPointsHelp:(UIButton *)control
+{
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat: NSLocalizedString(@"points_help", nil), self.points] delegate:nil cancelButtonTitle:NSLocalizedString(@"common_ok", nil) otherButtonTitles:nil, nil];
+	[alertView show];
+}
+
+- (void)changeTitle:(UIGestureRecognizer *)recognizer
+{
+	UIAlertView *alertView = [[UIAlertView alloc]
+							  initWithTitle:NSLocalizedString(@"listvc_new_title_alertview", nil)
+							  message:NSLocalizedString(@"listvc_new_title_message", nil)
+							  delegate:self
+							  cancelButtonTitle:NSLocalizedString(@"common_cancel", nil)
+							  otherButtonTitles:NSLocalizedString(@"common_ok", nil), nil];
+																  
+	[alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+	alertView.tag = kShareAlertView;
+	
+	/* Display a numerical keypad for this text field */
+	UITextField *textField = [alertView textFieldAtIndex:0];
+	textField.text = self.navigationItem.title;
+	
+	[alertView show];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	if (alertView.tag == kShareAlertView)
+	{
+		if (buttonIndex == 1)
+		{
+			self.title = [alertView textFieldAtIndex:0].text;
+			[self saveListTitle];
+		}
+	}
 }
 
 #pragma mark - Segue
@@ -201,6 +306,17 @@ static NSString *kSegueGoToSettings				= @"settings";
 	{
 		// Nothing to do right now
 	}
+}
+
+#pragma mark - Notifications
+
+- (void)ubiquitousKeyValueStoreDidChange: (NSNotification *)notification
+{
+	self.points = [self.keyStore objectForKey:kKeyStorePoints];
+	[self.pointsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"listvc_points", nil), [self.keyStore stringForKey:kKeyStorePoints]] forState:UIControlStateNormal];
+	
+	NSString *newTitle = [self.keyStore objectForKey:kKeyStorePoints];
+	self.title = newTitle == nil ? NSLocalizedString(@"listvc_title_vc", nil) : newTitle;
 }
 
 #pragma mark - Helpers
@@ -259,6 +375,35 @@ static NSString *kSegueGoToSettings				= @"settings";
 	self.navigationItem.rightBarButtonItem = rightBarButtonItem;
 }
 
+- (void)addToolbar
+{
+	UIColor *defaultBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+	
+	self.pointsButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 140, 0, 140, 44)];
+	[self.pointsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"listvc_points", nil), self.points] forState:UIControlStateNormal];
+	self.pointsButton.backgroundColor = [UIColor clearColor];
+	[self.pointsButton setTitleColor:defaultBlue forState:UIControlStateNormal];
+	[self.pointsButton addTarget:self action:@selector(showPointsHelp:) forControlEvents:UIControlEventTouchUpInside];
+	self.pointsButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.pointsButton];
+	[self.navigationController.toolbar setItems:[NSArray arrayWithObject:item] animated:NO];
+	
+	self.toolbarItems = [NSArray arrayWithObjects:item, nil];
+}
+
+- (void)savePoints
+{
+    [self.keyStore setObject:self.points forKey:kKeyStorePoints];
+    [self.keyStore synchronize];
+	[self.pointsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"listvc_points", nil), self.points] forState:UIControlStateNormal];
+}
+
+- (void)saveListTitle
+{
+	[self.keyStore setString:self.title forKey:kKeyStoreListTitle];
+	[self.keyStore synchronize];
+}
+
 - (void)fetchData
 {
     NSPredicate *predicate = [[[STDAppDelegate shareInstance] eventStore] predicateForRemindersInCalendars:nil];
@@ -269,11 +414,10 @@ static NSString *kSegueGoToSettings				= @"settings";
 			self.reminderList = [[[reminders reverseObjectEnumerator] allObjects] mutableCopy];
 			[self.tableView reloadData];
 		});
-		
     }];
 }
 
--(void)handleSwipe:(UISwipeGestureRecognizer *)sender
+- (void)handleSwipe:(UISwipeGestureRecognizer *)sender
 {
     STDTableViewCell *cell = (STDTableViewCell *)sender.view;
     EKReminder *reminder = [self.reminderList objectAtIndex:cell.tag];

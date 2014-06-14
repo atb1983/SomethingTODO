@@ -1,0 +1,68 @@
+/* 
+  Localizable.strings
+  SomethingTODO
+
+  Created by Alex Núñez on 28/03/14.
+  Copyright (c) 2014 Alex Franco. All rights reserved.
+*/
+
+// Common
+"common_alertview_title" = "Recordatorios";
+"common_ok" = "OK";
+
+// List Reminders VC
+"listvc_title_vc" = "Tus recordatorios";
+"listvc_new_reminder_added" = "Un nuevo recordatorio se ha añadido a tu lista";
+"listvc_reminder_updated" = "El recordatorio se ha actualizado";
+"listvc_no_access" = "Para usar esta aplicacion es necesario dar permisos para poder leer los recordatorios.";
+"listvc_no_reminders" = "Toca aqui para crear un nuevo recordatorio";
+"listvc_header" = "Tareas no completadas (%ld)";
+"listvc_points" = "%@ Punto(s)";
+
+// Edit Reminder VC
+"edit_title_vc" = "Detalles del recordatorio";
+"edit_title_label" = "Titulo";
+"edit_title_textfield_placeholder" = "Escribe el título";
+"edit_title_textfield_empty" = "Se necesita de un título para crear un recordatorío.";
+"edit_description_label" = "Descripcion:";
+"edit_priority_label" = "Prioridad:";
+"edit_priority_segment_normal" = "Normal";
+"edit_priority_segment_high" = "Alta";
+"edit_save" = "Guardar cambios";
+"edit_reminder_error" = "Tu recordatorio no se ha podido guardar, ha ocurrido un error.";
+"remove_reminder_error" = "No ha sido posible borrar tu recordatorio, intentelo de nuevo.";
+"edit_alarm_no_set" = "Sin alarma.";
+
+// Map Reminder
+"map_title_vc" = "Localición";
+"map_reminder_title" = "Recordatorio";
+
+// Date Format
+"reminder_utils_just_now" = "Justo ahora";
+"reminder_utils_today" = "Hoy a las %@";
+"reminder_utils_yesterday" = "Ayer a las %@";
+
+// Settings
+"settings_title_vc" = "Something ToDo";
+"settings_version" = "Version";
+"settings_support_cell" = "Enviar Feedback";
+"settings_share_cell" = "Cuéntale a un amigo de nosotros";
+"settings_review_cell" = "Review";
+"settings_about_cell" = "Sobre...";
+"settings_support_header" = "Soporte";
+
+"support_mail_subject" = "Someting ToDo Soporte";
+"support_mail_body" = "Escriba aqui su Feedback";
+"tell_a_friend_email_subject" = "Prueba ahora la aplicacion Something TODO! es gratuita!";
+"tell_a_friend_email_body" = "Prueba ahora la aplicacion Something TODO! es gratuita!, la manera más fácil de manejar tus recordatorios";
+"share_facebook_title" = "Prueba ahora la aplicacion Something TODO! es gratuita!, la manera más fácil de manejar tus recordatorios";
+"share_twitter_title" = "Prueba ahora la aplicacion Something TODO! es gratuita!, la manera más fácil de manejar tus recordatorios";
+
+"settings_alert_message_no_email_account" = "No tienes ninguna cuenta de correo en tu móvil, revisa las opcions de configuration en tu iphone";
+"settings_alert_message_no_facebook_account" = "No tienes ninguna cuenta de facebook en tu móvil, revisa las opcions de configuration en tu iphone";
+"settings_alert_message_no_twitter_account" = "No tienes ninguna cuenta de twitter en tu móvil, revisa las opcions de configuration en tu iphone";
+
+// About
+"about_about_me" = "Sobre mi";
+"about_licence" = "Tambièn gracías a: %@ %@";
+"about_message" = "Tus recordatorios, màs fàcil que nunca";

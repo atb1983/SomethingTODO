@@ -49,8 +49,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		783CB46A18F12E1E00567B0A /* STDMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDMapViewController.h; path = Map/STDMapViewController.h; sourceTree = "<group>"; };
-		783CB46B18F12E1E00567B0A /* STDMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDMapViewController.m; path = Map/STDMapViewController.m; sourceTree = "<group>"; };
+		780C356E194C665800D8C32A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		780C356F194C665800D8C32A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		780C3570194C665800D8C32A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		780C3571194C665800D8C32A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		780C357A194C7ACA00D8C32A /* SToDo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SToDo.entitlements; sourceTree = "<group>"; };
+		783CB46A18F12E1E00567B0A /* STDMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = STDMapViewController.h; path = Map/STDMapViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		783CB46B18F12E1E00567B0A /* STDMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = STDMapViewController.m; path = Map/STDMapViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		783CB46D18F12E8500567B0A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		786FDD3D194C135F0017E8FE /* STDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDSettingsViewController.h; sourceTree = "<group>"; };
 		786FDD3E194C135F0017E8FE /* STDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDSettingsViewController.m; sourceTree = "<group>"; };
@@ -76,13 +81,13 @@
 		789DF8D318E6145E00DE045D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		789DF8D618E6190300DE045D /* STDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDTableViewCell.h; path = TableCell/STDTableViewCell.h; sourceTree = "<group>"; };
 		789DF8D718E6190300DE045D /* STDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDTableViewCell.m; path = TableCell/STDTableViewCell.m; sourceTree = "<group>"; };
-		789DF8DE18E61D1C00DE045D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		789DF8DE18E61D1C00DE045D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		789DF92A18E6A20500DE045D /* STDTableViewCellOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDTableViewCellOverlay.h; path = TableCell/STDTableViewCellOverlay.h; sourceTree = "<group>"; };
 		789DF92B18E6A20500DE045D /* STDTableViewCellOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDTableViewCellOverlay.m; path = TableCell/STDTableViewCellOverlay.m; sourceTree = "<group>"; };
-		789DF93118E6D62500DE045D /* STDEditReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDEditReminderViewController.h; sourceTree = "<group>"; };
-		789DF93218E6D62500DE045D /* STDEditReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDEditReminderViewController.m; sourceTree = "<group>"; };
-		789DF93518E6E40F00DE045D /* STDReminderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STDReminderUtils.h; path = Utils/STDReminderUtils.h; sourceTree = "<group>"; };
-		789DF93618E6E40F00DE045D /* STDReminderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STDReminderUtils.m; path = Utils/STDReminderUtils.m; sourceTree = "<group>"; };
+		789DF93118E6D62500DE045D /* STDEditReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = STDEditReminderViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		789DF93218E6D62500DE045D /* STDEditReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = STDEditReminderViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		789DF93518E6E40F00DE045D /* STDReminderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = STDReminderUtils.h; path = Utils/STDReminderUtils.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		789DF93618E6E40F00DE045D /* STDReminderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = STDReminderUtils.m; path = Utils/STDReminderUtils.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		789DF93918E70F5200DE045D /* UITextField+ExtraPadding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+ExtraPadding.h"; path = "Categories/UITextField+ExtraPadding.h"; sourceTree = "<group>"; };
 		789DF93A18E70F5200DE045D /* UITextField+ExtraPadding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+ExtraPadding.m"; path = "Categories/UITextField+ExtraPadding.m"; sourceTree = "<group>"; };
 		789DF93C18E7105A00DE045D /* UIView+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Border.h"; path = "Categories/UIView+Border.h"; sourceTree = "<group>"; };
@@ -91,7 +96,7 @@
 		78CEFD4A18E7FDFA0014418C /* SomethingTODO Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SomethingTODO Tests-Info.plist"; sourceTree = "<group>"; };
 		78CEFD4C18E7FDFA0014418C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		78CEFD5018E7FDFA0014418C /* SomethingTODO Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SomethingTODO Tests-Prefix.pch"; sourceTree = "<group>"; };
-		78CEFD5818E86DF20014418C /* STDReminderUtilsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDReminderUtilsTest.m; sourceTree = "<group>"; };
+		78CEFD5818E86DF20014418C /* STDReminderUtilsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = STDReminderUtilsTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7F9446A0852240B8B0E6540C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B1DFFE06A69E4FF0BE7231A0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -173,6 +178,7 @@
 		789DF8A418E60D8200DE045D /* SomethingTODO */ = {
 			isa = PBXGroup;
 			children = (
+				780C357A194C7ACA00D8C32A /* SToDo.entitlements */,
 				783CB46918F12DF900567B0A /* Maps */,
 				789DF93818E70F2600DE045D /* Categories */,
 				789DF93418E6E3F900DE045D /* Utils */,
@@ -308,6 +314,11 @@
 				TargetAttributes = {
 					789DF89A18E60D8200DE045D = {
 						DevelopmentTeam = R9Z3HD7PQ4;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					78CEFD4318E7FDF90014418C = {
 						TestTargetID = 789DF89A18E60D8200DE045D;
@@ -321,6 +332,9 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				fr,
+				it,
 			);
 			mainGroup = 789DF89218E60D8200DE045D;
 			productRefGroup = 789DF89C18E60D8200DE045D /* Products */;
@@ -431,6 +445,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				789DF8A818E60D8200DE045D /* en */,
+				780C356F194C665800D8C32A /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -439,6 +454,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				789DF8B118E60D8200DE045D /* Base */,
+				780C356E194C665800D8C32A /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -447,6 +463,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				789DF8DE18E61D1C00DE045D /* en */,
+				780C3570194C665800D8C32A /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -455,6 +472,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				78CEFD4C18E7FDFA0014418C /* en */,
+				780C3571194C665800D8C32A /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -538,12 +556,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = SomethingTODO/SToDo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
 				INFOPLIST_FILE = "SomethingTODO/SomethingTODO-Info.plist";
 				PRODUCT_NAME = SToDo;
-				PROVISIONING_PROFILE = "52F6BF9A-C8D9-40B1-9977-91E152985057";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -554,12 +574,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = SomethingTODO/SToDo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
 				INFOPLIST_FILE = "SomethingTODO/SomethingTODO-Info.plist";
 				PRODUCT_NAME = SToDo;
-				PROVISIONING_PROFILE = "BBCB1DA4-DCEB-4E59-8117-F5F69F9CB24E";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
