@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) EKEventStore *eventStore;
+@property (nonatomic, assign) BOOL hasCloudAccess;
 
 + (instancetype)shareInstance;
 

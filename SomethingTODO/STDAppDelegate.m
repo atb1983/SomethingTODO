@@ -10,6 +10,9 @@
 #import <PLCrashReport.h>
 #import <PLCrashReporter.h>
 
+@interface STDAppDelegate ()
+@end
+
 @implementation STDAppDelegate
 
 + (instancetype)shareInstance
@@ -20,7 +23,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.eventStore = [[EKEventStore alloc] init];
-    
+
+    // Do we have iCloud Access?
+	NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+	self.hasCloudAccess = ubiq != nil;
+	
+	// Crash REport
 	PLCrashReporter *crashReporter = [PLCrashReporter sharedReporter];
 	NSError *error;
 	
@@ -39,7 +47,7 @@
 /**
  * Called to handle a pending crash report.
  */
-- (void) handleCrashReport {
+- (void)handleCrashReport {
     PLCrashReporter *crashReporter = [PLCrashReporter sharedReporter];
     NSData *crashData;
     NSError *error;

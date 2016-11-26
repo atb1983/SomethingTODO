@@ -53,7 +53,6 @@
 		780C356F194C665800D8C32A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		780C3570194C665800D8C32A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		780C3571194C665800D8C32A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		780C357A194C7ACA00D8C32A /* SToDo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SToDo.entitlements; sourceTree = "<group>"; };
 		783CB46A18F12E1E00567B0A /* STDMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = STDMapViewController.h; path = Map/STDMapViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		783CB46B18F12E1E00567B0A /* STDMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = STDMapViewController.m; path = Map/STDMapViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		783CB46D18F12E8500567B0A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -63,7 +62,8 @@
 		786FDD42194C13CB0017E8FE /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		786FDD44194C15900017E8FE /* STDConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDConst.h; sourceTree = "<group>"; };
 		786FDD45194C15900017E8FE /* STDConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDConst.m; sourceTree = "<group>"; };
-		789DF89B18E60D8200DE045D /* SToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7883D3FA1956BCA2008701A0 /* stodo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = stodo.entitlements; sourceTree = "<group>"; };
+		789DF89B18E60D8200DE045D /* stodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = stodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789DF89E18E60D8200DE045D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		789DF8A018E60D8200DE045D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		789DF8A218E60D8200DE045D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -153,7 +153,7 @@
 		789DF89C18E60D8200DE045D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				789DF89B18E60D8200DE045D /* SToDo.app */,
+				789DF89B18E60D8200DE045D /* stodo.app */,
 				78CEFD4418E7FDF90014418C /* SomethingTODO Tests.xctest */,
 			);
 			name = Products;
@@ -178,7 +178,7 @@
 		789DF8A418E60D8200DE045D /* SomethingTODO */ = {
 			isa = PBXGroup;
 			children = (
-				780C357A194C7ACA00D8C32A /* SToDo.entitlements */,
+				7883D3FA1956BCA2008701A0 /* stodo.entitlements */,
 				783CB46918F12DF900567B0A /* Maps */,
 				789DF93818E70F2600DE045D /* Categories */,
 				789DF93418E6E3F900DE045D /* Utils */,
@@ -281,7 +281,7 @@
 			);
 			name = SomethingTODO;
 			productName = SomethingTODO;
-			productReference = 789DF89B18E60D8200DE045D /* SToDo.app */;
+			productReference = 789DF89B18E60D8200DE045D /* stodo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		78CEFD4318E7FDF90014418C /* SomethingTODO Tests */ = {
@@ -309,7 +309,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = STD;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Alex Franco";
 				TargetAttributes = {
 					789DF89A18E60D8200DE045D = {
@@ -496,8 +496,11 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Nunez (7DH3PWMF67)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Nunez (7DH3PWMF67)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -514,6 +517,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "386B5EBA-BDFC-4FBA-9163-4691DDFABEA9";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -534,8 +538,10 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alex Nunez (R9Z3HD7PQ4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alex Nunez (R9Z3HD7PQ4)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -545,6 +551,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PROVISIONING_PROFILE = "B6418883-11B6-4620-920C-86734923177E";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -556,13 +563,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = SomethingTODO/SToDo.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SomethingTODO/stodo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
 				INFOPLIST_FILE = "SomethingTODO/SomethingTODO-Info.plist";
-				PRODUCT_NAME = SToDo;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.atb.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = stodo;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -574,17 +582,91 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = SomethingTODO/SToDo.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SomethingTODO/stodo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
 				INFOPLIST_FILE = "SomethingTODO/SomethingTODO-Info.plist";
-				PRODUCT_NAME = SToDo;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.atb.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = stodo;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
+		};
+		78A0660C194CF52900FF9023 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alex Nunez (R9Z3HD7PQ4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alex Nunez (R9Z3HD7PQ4)";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PROVISIONING_PROFILE = "CAEA72A4-9D1B-438C-A0E2-65A1E138642F";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad Hoc";
+		};
+		78A0660D194CF52900FF9023 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F9446A0852240B8B0E6540C /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = SomethingTODO/stodo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SomethingTODO/SomethingTODO-Prefix.pch";
+				INFOPLIST_FILE = "SomethingTODO/SomethingTODO-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.atb.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = stodo;
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Ad Hoc";
+		};
+		78A0660E194CF52900FF9023 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SToDo.app/SToDo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SomethingTODO Tests/SomethingTODO Tests-Prefix.pch";
+				INFOPLIST_FILE = "SomethingTODO Tests/SomethingTODO Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.atb.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "SomethingTODO Tests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = "Ad Hoc";
 		};
 		78CEFD5318E7FDFA0014418C /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -602,7 +684,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SomethingTODO Tests/SomethingTODO Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.atb.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "SomethingTODO Tests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -620,7 +703,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SomethingTODO Tests/SomethingTODO Tests-Prefix.pch";
 				INFOPLIST_FILE = "SomethingTODO Tests/SomethingTODO Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.atb.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "SomethingTODO Tests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -634,6 +718,7 @@
 			buildConfigurations = (
 				789DF8CB18E60D8200DE045D /* Debug */,
 				789DF8CC18E60D8200DE045D /* Release */,
+				78A0660C194CF52900FF9023 /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -643,6 +728,7 @@
 			buildConfigurations = (
 				789DF8CE18E60D8200DE045D /* Debug */,
 				789DF8CF18E60D8200DE045D /* Release */,
+				78A0660D194CF52900FF9023 /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -652,6 +738,7 @@
 			buildConfigurations = (
 				78CEFD5318E7FDFA0014418C /* Debug */,
 				78CEFD5418E7FDFA0014418C /* Release */,
+				78A0660E194CF52900FF9023 /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

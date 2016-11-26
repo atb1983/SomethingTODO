@@ -47,16 +47,13 @@ static NSString *kSegueGoToSettings				= @"settings";
 	self.keyStore = [[NSUbiquitousKeyValueStore alloc] init];
 	self.points = [self.keyStore objectForKey:kKeyStorePoints];
 	
-	if (self.points != nil)
+	if (self.points == nil)
 	{
-		[self.pointsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"listvc_points", nil), self.points] forState:UIControlStateNormal];
+		self.points = [NSNumber numberWithInt:0];
 	}
-	else
-	{
-		self.points = 0;
-	}
-	
-	
+
+	[self.pointsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"listvc_points", nil), self.points] forState:UIControlStateNormal];
+
 	// Navigation Bar
 	NSString *newTitle = [self.keyStore objectForKey:kKeyStoreListTitle];
 	self.title = newTitle == nil ? NSLocalizedString(@"listvc_title_vc", nil) : newTitle;
@@ -315,7 +312,7 @@ static NSString *kSegueGoToSettings				= @"settings";
 	self.points = [self.keyStore objectForKey:kKeyStorePoints];
 	[self.pointsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"listvc_points", nil), [self.keyStore stringForKey:kKeyStorePoints]] forState:UIControlStateNormal];
 	
-	NSString *newTitle = [self.keyStore objectForKey:kKeyStorePoints];
+	NSString *newTitle = [self.keyStore objectForKey:kKeyStoreListTitle];
 	self.title = newTitle == nil ? NSLocalizedString(@"listvc_title_vc", nil) : newTitle;
 }
 
@@ -380,7 +377,6 @@ static NSString *kSegueGoToSettings				= @"settings";
 	UIColor *defaultBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
 	
 	self.pointsButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 140, 0, 140, 44)];
-	[self.pointsButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"listvc_points", nil), self.points] forState:UIControlStateNormal];
 	self.pointsButton.backgroundColor = [UIColor clearColor];
 	[self.pointsButton setTitleColor:defaultBlue forState:UIControlStateNormal];
 	[self.pointsButton addTarget:self action:@selector(showPointsHelp:) forControlEvents:UIControlEventTouchUpInside];

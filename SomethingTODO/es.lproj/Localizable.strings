@@ -9,6 +9,7 @@
 // Common
 "common_alertview_title" = "Recordatorios";
 "common_ok" = "OK";
+"common_cancel" = "Cancelar";
 
 // List Reminders VC
 "listvc_title_vc" = "Tus recordatorios";
@@ -18,6 +19,10 @@
 "listvc_no_reminders" = "Toca aqui para crear un nuevo recordatorio";
 "listvc_header" = "Tareas no completadas (%ld)";
 "listvc_points" = "%@ Punto(s)";
+"listvc_new_title_alertview" = "Nuevo título";
+"listvc_new_title_message" = "Escribe aqui el título de tu lista:";
+
+"points_help" = "Gana puntos cuando completes tareas, ahora tienes %@ Puntos(s)";
 
 // Edit Reminder VC
 "edit_title_vc" = "Detalles del recordatorio";
@@ -66,3 +71,4 @@
 "about_about_me" = "Sobre mi";
 "about_licence" = "Tambièn gracías a: %@ %@";
 "about_message" = "Tus recordatorios, màs fàcil que nunca";
+

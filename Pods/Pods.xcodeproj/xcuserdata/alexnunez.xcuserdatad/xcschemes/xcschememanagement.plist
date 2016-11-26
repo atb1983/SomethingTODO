@@ -8,31 +8,37 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>Pods-PLCrashReporter.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>070774EC8A574F7BB1C744A0</key>
+		<key>0427CDA856084F0FA6051FAE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>863854220203451687A33D44</key>
+		<key>77B986AA341B414980363631</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B55C1996019742E29E24388B</key>
+		<key>FBB48A3D8DE04F57B57D1E10</key>
 		<dict>
 			<key>primary</key>
 			<true/>
